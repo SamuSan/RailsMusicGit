@@ -1,0 +1,16 @@
+<div>
+  <h1>New Project</h1>
+    <%= form_for Project.new do |f| %>
+      <p>
+        Project Title:
+        <%= f.text_field :title, autofocus: true %>
+      </p>
+      <p>
+        Tempo : 
+        <%= f.number_field :tempo %>  
+      </p>
+      <p>
+        <%= f.submit "Create" %>
+      </p>      
+    <% end %>
+</div>

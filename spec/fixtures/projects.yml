@@ -1,0 +1,9 @@
+new: {}
+
+with_title : 
+ title : "ManBoogey"
+ tempo : 140
+
+with_one_commit : 
+ title : 'Mandango'
+ tempo : 100

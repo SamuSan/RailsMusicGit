@@ -1,0 +1,10 @@
+<h1>Projects</h1>
+
+  <% @projects.each do |project| %>
+    <div>
+      <label>Title : <%= project.title %></label>
+      <label>Tempo : <%= project.tempo %></label>
+    </div>
+  <% end %>
+
+<%= link_to "New Project", new_project_path%>
