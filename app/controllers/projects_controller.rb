@@ -4,6 +4,7 @@ class ProjectsController < ApplicationController
 	end
 
 	def show
+		@player = Player.new
 		@project = Project.find(params[:id])
 	end
 
@@ -12,7 +13,13 @@ class ProjectsController < ApplicationController
 	end
 
 	def create
-		project = Project.create!
+		project = Project.create!(project_params)
 		redirect_to project
+	end
+
+	private
+
+	def project_params
+		params.require(:project).permit(:title, :tempo)
 	end
 end

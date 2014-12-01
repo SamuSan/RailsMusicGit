@@ -2,7 +2,7 @@
 
   <% @projects.each do |project| %>
     <div>
-      <label>Title : <%= project.title %></label>
+      <label>Title : <%= link_to "#{project.title}", project %></label>
       <label>Tempo : <%= project.tempo %></label>
     </div>
   <% end %>
