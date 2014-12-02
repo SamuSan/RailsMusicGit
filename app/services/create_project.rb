@@ -5,5 +5,7 @@ class CreateProject
 
 	def call
 		project = Project.create(@project_params)
+    project.commits.create
+    project
 	end
 end
