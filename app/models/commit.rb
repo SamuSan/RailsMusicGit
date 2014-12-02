@@ -1,6 +1,5 @@
 class Commit < ActiveRecord::Base
   has_many :notes
-
-  belongs_to :parent, :class_name => 'Commit', :foreign_key => :parent_id
-  has_many :children, :class_name => 'Commit'
+  belongs_to :project
+  belongs_to :parent_commit, :class_name => 'Commit'
 end

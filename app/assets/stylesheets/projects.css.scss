@@ -2,10 +2,12 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .note_button{
-  border-radius: 5px;
-  src: "Button.png"
+border-radius: 5px;
 }
-.note_on_button{
-  border-radius: 15px;
-  src: "Button_on.png"
+.note_button:hover{
+border-radius: 10px;
+}
+.project_management_div{
+	background-color: #aaaaaa;
+	width: 50%;
 }

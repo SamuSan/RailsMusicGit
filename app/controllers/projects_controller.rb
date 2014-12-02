@@ -13,8 +13,13 @@ class ProjectsController < ApplicationController
 	end
 
 	def create
-		project = Project.create!(project_params)
-		redirect_to project
+		service = CreateProject.new(project_params)
+		
+		if project = service.call
+			redirect_to project
+		else
+			redirect_to :index
+		end
 	end
 
 	private

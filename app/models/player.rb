@@ -1,10 +1,10 @@
 class Player
-	ROWS 		= 4
-	COLUMNS = 4
-
-	attr_reader :player_grid
+	SIZE 		= 8
+	PAD_SIZE = 50
+	attr_reader :player_grid, :pad_size
 
 	def initialize
-		@player_grid = Array.new(ROWS).fill(Array.new(COLUMNS))		
+		@pad_size = "#{PAD_SIZE}x#{PAD_SIZE}"
+		@player_grid = Array.new(SIZE).fill(Array.new(SIZE))		
 	end
 end

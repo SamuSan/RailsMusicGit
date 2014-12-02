@@ -26,9 +26,5 @@ RSpec.describe Project, type: :model do
         expect(Project.create!.tempo).to be 120 
       end
     end
-
-    it "creates a project with zero commits" do
-      expect(projects(:new).commits).to be_empty 
-    end
   end
 end

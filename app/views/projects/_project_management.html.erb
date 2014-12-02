@@ -1,0 +1,5 @@
+<div class="project_management_div" >
+<label>Commits: </label><%= @project.commits.size%>
+
+<%= link_to "Commit", commits_path(project_id: @project.id, parent_commit_id: @project.commits.last.id), method: :post %>
+</div>

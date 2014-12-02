@@ -14,7 +14,8 @@
 ActiveRecord::Schema.define(version: 20141130205354) do
 
   create_table "commits", force: true do |t|
-    t.integer  "project_id"
+    t.integer  "project_id",       null: false
+    t.integer  "parent_commit_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -33,8 +34,10 @@ ActiveRecord::Schema.define(version: 20141130205354) do
   add_index "notes", ["commit_id"], name: "index_notes_on_commit_id"
 
   create_table "projects", force: true do |t|
-    t.string   "title",      default: "Untitled", null: false
-    t.integer  "tempo",      default: 120,        null: false
+    t.integer  "initial_commit_id"
+    t.integer  "current_commit"
+    t.string   "title",             default: "Untitled", null: false
+    t.integer  "tempo",             default: 120,        null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

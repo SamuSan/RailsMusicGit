@@ -4,10 +4,21 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'projects#index'
-
+  # resources :commits
+  resources :commits #will render commits under project
+  resources :notes
   resources :projects do 
 
   end
+#nested = shallow tre, leaves out superfluous IDs
+#Can do nice URL to specific project here iwht title etc that coulde be good
+
+
+
+
+
+
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

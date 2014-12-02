@@ -1,8 +1,8 @@
 <% @player.player_grid.each do |row| %>
   <div class="icon_surround">
     <% row.each do |column| %>
-      <span class="icon">
-        <%= image_tag "Button.png", class: "note_button" %>
+      <span>
+        <%= image_tag "button_0.png", size: @player.pad_size, class: "note_button"%>
       </span>
     <% end %>
   </div>
