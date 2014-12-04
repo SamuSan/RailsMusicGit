@@ -6,6 +6,7 @@ class ProjectsController < ApplicationController
 	def show
 		@player = Player.new
 		@project = Project.find(params[:id])
+		@last_commit = @project.commits.last
 	end
 
 	def new

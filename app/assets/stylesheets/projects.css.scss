@@ -1,13 +1,38 @@
 // Place all the styles related to the projects controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.main_container{
+  width: 50%;
+  margin: 0 auto;
+}
+.page_div{
+  margin: 0px 0px 100px 0px
+}
 .note_button{
-border-radius: 5px;
+  margin: 3px 1px 3px 1px;
+	border-radius: 5px;
 }
 .note_button:hover{
-border-radius: 10px;
+	border-radius: 10px;
 }
 .project_management_div{
-	background-color: #aaaaaa;
+	background-color: #bbbbbb;
 	width: 50%;
+}
+.commit_button, .revert_button{
+	border-radius: 10px;
+}
+.btn-commit_history{
+  font-family: 'Varela', sans-serif;
+  background-color: #9dcdeb;
+  border-color: #aaaaaa;
+
+}
+.btn-commit_history:active{
+  background-color: #e23853;
+  border-color: #aaaaaa;
+}
+.btn-commit_history:focus{
+  background-color: #e23853;
+  border-color: #aaaaaa;
 }

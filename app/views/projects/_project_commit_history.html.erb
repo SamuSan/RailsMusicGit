@@ -1,0 +1,10 @@
+<div class="btn-group-vertical" role="group">
+    <% @project.commits.last(10).each do |commit| %>
+      <% if !(commit == @project.commits.last) %>
+        <button type="button" class="btn btn-commit_history" data-id="<%= commit.id %>">Commit: <%= commit.id %></button>
+      <% else %>
+        <button type="button" class="btn btn-commit_history :active" autofocus="true" data-id="<%= commit.id %>">Commit: <%= commit.id %></button>
+      <% end %> 
+    <% end %>
+</div>
+

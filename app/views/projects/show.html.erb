@@ -1,2 +1,15 @@
-<%= render 'project_player' %>
-<%= render 'project_management' %>
+<meta property="projectId" content="<%= @project.id %>">
+<meta property="lastCommitId" content="<%= @last_commit.id %>">
+
+<div class="page_div">
+  <container class="col-md-8">
+    <div class="main_container">
+      <%= render 'project_player' %>  
+      <%= render 'project_management' %>
+    </div>
+  </container>
+
+  <container id="commit-history" class="col-md-4">
+    <%= render 'project_commit_history' %>
+  </container>
+</div>

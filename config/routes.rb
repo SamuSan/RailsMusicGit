@@ -5,10 +5,11 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'projects#index'
   # resources :commits
-  resources :commits #will render commits under project
-  resources :notes
-  resources :projects do 
 
+  resources :projects do 
+    resources :commits do #will render commits under project
+      resources :notes
+    end
   end
 #nested = shallow tre, leaves out superfluous IDs
 #Can do nice URL to specific project here iwht title etc that coulde be good

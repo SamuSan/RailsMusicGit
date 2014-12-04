@@ -1,9 +1,11 @@
-<% @player.player_grid.each do |row| %>
-  <div class="icon_surround">
-    <% row.each do |column| %>
-      <span>
-        <%= image_tag "button_0.png", size: @player.pad_size, class: "note_button", id: column%>
-      </span>
-    <% end %>
-  </div>
-<% end %>
+<div>
+  <% @player.player_grid.each do |row| %>
+    <div>
+      <% row.each do |column| %>
+        <span>
+          <%= image_tag "button_0.png", size: @player.pad_size, class: "note_button", :data => {:position => column}%>
+        </span>
+      <% end %>
+    </div>
+  <% end %>
+</div>
