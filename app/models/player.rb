@@ -1,12 +1,13 @@
 class Player
-	SIZE 		= 8
+	DRUMS 	= 10
+	TICKS 	= 16
 	PAD_SIZE = 50
-  
+
 	attr_reader :player_grid, :pad_size
 
 	def initialize
 		@pad_size = "#{PAD_SIZE}x#{PAD_SIZE}"
-		@player_grid = Array.new(SIZE).fill(Array.new(SIZE))
+		@player_grid = Array.new(DRUMS).fill(Array.new(TICKS))
     fill_grid_with_indices
 	end
 

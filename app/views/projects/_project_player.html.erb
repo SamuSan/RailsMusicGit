@@ -1,11 +1,12 @@
 <div>
   <% @player.player_grid.each do |row| %>
     <div>
-      <% row.each do |column| %>
-        <span>
-          <%= image_tag "button_0.png", size: @player.pad_size, class: "note_button", :data => {:position => column}%>
-        </span>
-      <% end %>
+      <!-- <div><%= drum_name(row[0] / 16) %></div> -->
+        <% row.each do |column| %>
+          <span>
+            <%= image_tag "button_0.png", size: @player.pad_size, class: "note_button", :data => {:position => column}%>
+          </span>
+        <% end %>
     </div>
   <% end %>
 </div>

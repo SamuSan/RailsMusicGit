@@ -4,6 +4,21 @@ $(function() {
     render_grid();  
   });
 
+  $('.play_button').on('click', function(e){
+    console.log(e)
+    runSequencer();
+  });
+
+  $('.stop_button').on('click', function(e){
+    console.log(e)
+    stopSequencer();
+  });
+
+  $('.clear_all_button').on('click', function(e){
+    player_notes = [];
+    render_grid();
+  });
+
   $('.btn-commit_history').on('click', function(e){
     console.log("Goodlordbabyjaysus");
   });  

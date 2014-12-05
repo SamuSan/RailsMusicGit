@@ -2,12 +2,32 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .main_container{
-  width: 50%;
+  width: 60%;
   margin: 0 auto;
 }
 .page_div{
-  margin: 0px 0px 100px 0px
+  margin: 0px 0px 60px 0px
 }
+
+
+//Maybe dont need this shiz?????
+.play_button{
+  fill:#040f24;
+}
+.play_button:hover{
+  fill: #cceb9d;  
+}
+.play_button_active{
+  fill: #cceb9d;  
+}
+.stop_button{
+  fill:#040f24;
+}
+.stop_button_active{
+  fill:#e23853;
+}
+///////////////////
+
 .note_button{
   margin: 3px 1px 3px 1px;
 	border-radius: 5px;
@@ -15,12 +35,13 @@
 .note_button:hover{
 	border-radius: 10px;
 }
-.project_management_div{
+.project_management_div, .player_transport_div{
 	background-color: #bbbbbb;
-	width: 50%;
+	// width: 50%;
 }
-.commit_button, .revert_button{
+.commit_button, .revert_button, .clear_all_button{
 	border-radius: 10px;
+
 }
 .btn-commit_history{
   font-family: 'Varela', sans-serif;
