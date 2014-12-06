@@ -19,12 +19,13 @@ var DrumMachine = function() {
     hihat:    SAMPLE_PATH + "clsdhat808.wav",
     clap:     SAMPLE_PATH + "claps808.wav",
     snare:    SAMPLE_PATH + "snare808.wav",
+    sidestick: SAMPLE_PATH + "sidestick808.wav", 
     kick:     SAMPLE_PATH + "kick808.wav"
   });
 };
 
 DrumMachine.prototype.play = function(triggerArrays) {
-  audioBuffers = [this.cymbal,this.cabasa, this.clave, this.cowbell, this.ohat, this.hihat, this.clap, this.snare, this.kick];
+  audioBuffers = [this.cymbal,this.cabasa, this.clave, this.cowbell, this.ohat, this.hihat, this.clap, this.snare,this.sidestick, this.kick];
   // We'll start playing the rhythm 100 milliseconds from "now"
   var startTime = context.currentTime + 0.100;
   // var tempo = 80; // BPM (beats per minute)
@@ -37,8 +38,8 @@ DrumMachine.prototype.play = function(triggerArrays) {
     triggerArrays.forEach(function(triggerArray) { 
       triggerArray.forEach(function(trigger){
         console.log(audioBuffers[triggerArrays.indexOf(triggerArray)])
-        console.log("THIS IS THE INDEDX" + triggerArrays.indexOf(triggerArray))
-        console.log("This is the position value"+trigger.position % 16);
+        console.log("THIS IS THE INDED " + triggerArrays.indexOf(triggerArray))
+        console.log("This is the position value "+trigger.position % 16);
         playSound(audioBuffers[triggerArrays.indexOf(triggerArray)], time + ((trigger.position % 16) * semi) )
       });
     });
