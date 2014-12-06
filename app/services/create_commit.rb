@@ -1,5 +1,5 @@
 class CreateCommit
-	def initialize(project:, commit: nil, notes: nil) 
+	def initialize(project: project, commit: nil, notes: nil) 
 		@project  = project
 		@commit = commit
 		@notes = notes

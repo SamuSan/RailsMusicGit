@@ -12,7 +12,7 @@ class Player
 	end
 
   def fill_grid_with_indices
-    index = 0 
+    index = -1 
     @player_grid = @player_grid.map { |row| row.map { |column| column = index; index += 1 } }
   end
 end

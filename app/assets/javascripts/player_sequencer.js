@@ -6,8 +6,7 @@ $(function(){
 });
 
 function runSequencer(){
-  prepareNotesArray(player_notes);
-  // eightOhEight.play();
+  eightOhEight.play(prepareNotesArray(player_notes));
 }
 
 function stopSequencer(){
@@ -18,15 +17,9 @@ function prepareNotesArray(player_notes){
   var notesSortedForBuffers = [];
   console.log(player_notes);
   for (var i = 0; i <= 144; i+=16) {
-    console.log("" + i + "/// " + (i + 17))
     sliced = player_notes.slice(i,(i + 16));
-    notesSortedForBuffers.push(sliced);
+    notesSortedForBuffers.push(_.compact(sliced));
   }
-  _.each(notesSortedForBuffers, function(arr){
-      console.log(arr.length);
-
-  });
-  console.log(notesSortedForBuffers);
-    console.log("Moinkeys");
+  return notesSortedForBuffers;
 }
 
