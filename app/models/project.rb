@@ -3,5 +3,6 @@ class Project < ActiveRecord::Base
 
 	has_many :commits
   
+  validates :title, presence: true
   validates :tempo, inclusion: { in: TEMPO_RANGE }
 end

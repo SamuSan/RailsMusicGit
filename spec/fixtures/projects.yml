@@ -1,6 +1,7 @@
 new: {}
 
 with_title : 
+ id : 1
  title : "ManBoogey"
  tempo : 140
 

@@ -31,11 +31,11 @@ DrumMachine.prototype.play = function(triggersArray) {
 
   // Play 2 bars of the following:
   for (var bar = 0; bar < 4; bar++) {
-    console.log(audioBuffers[0]);
 
-    _.each(audioBuffers, function(buffer){
-      
+    triggersArray.forEach(function(trigger) { 
+      trigger.forEach()
     });
+
 
     
     // var time = startTime + bar * 8 * eighthNoteTime;

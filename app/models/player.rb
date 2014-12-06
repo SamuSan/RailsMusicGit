@@ -7,12 +7,6 @@ class Player
 
 	def initialize
 		@pad_size = "#{PAD_SIZE}x#{PAD_SIZE}"
-		@player_grid = Array.new(DRUMS).fill(Array.new(TICKS))
-    fill_grid_with_indices
+		@player_grid = (0...DRUMS * TICKS).to_a.in_groups_of(TICKS)
 	end
-
-  def fill_grid_with_indices
-    index = -1 
-    @player_grid = @player_grid.map { |row| row.map { |column| column = index; index += 1 } }
-  end
 end

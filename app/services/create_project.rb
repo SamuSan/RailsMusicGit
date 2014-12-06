@@ -4,8 +4,12 @@ class CreateProject
 	end
 
 	def call
-		project = Project.create(@project_params)
-    project.commits.create
-    project
+		Project.transaction do
+			project = Project.new(@project_params)
+	    if project.save
+		    project.commits.create!
+	    	project
+	    end
+	  end
 	end
 end
