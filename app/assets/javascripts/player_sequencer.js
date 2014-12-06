@@ -1,6 +1,7 @@
 
 var beat;
 var eightOhEight;
+
 $(function(){
   eightOhEight = new DrumMachine();
 });

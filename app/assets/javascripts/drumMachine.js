@@ -1,10 +1,11 @@
 var SAMPLE_PATH = "../assets/"
 var tempo;
 var audioBuffers;
+var semi;
 
 $(function(){
   tempo =  $("meta[property=projectTempo]").attr("content");
-  beat = 60000.0 / tempo;
+  beat = 60 / tempo;
   semi = beat / 16.0;
 });
 
@@ -22,7 +23,7 @@ var DrumMachine = function() {
   });
 };
 
-DrumMachine.prototype.play = function(triggersArray) {
+DrumMachine.prototype.play = function(triggerArrays) {
   audioBuffers = [this.cymbal,this.cabasa, this.clave, this.cowbell, this.ohat, this.hihat, this.clap, this.snare, this.kick];
   // We'll start playing the rhythm 100 milliseconds from "now"
   var startTime = context.currentTime + 0.100;
@@ -31,9 +32,15 @@ DrumMachine.prototype.play = function(triggersArray) {
 
   // Play 2 bars of the following:
   for (var bar = 0; bar < 4; bar++) {
+    var time = startTime + bar * 16 * semi;
 
-    triggersArray.forEach(function(trigger) { 
-      trigger.forEach()
+    triggerArrays.forEach(function(triggerArray) { 
+      triggerArray.forEach(function(trigger){
+        console.log(audioBuffers[triggerArrays.indexOf(triggerArray)])
+        console.log("THIS IS THE INDEDX" + triggerArrays.indexOf(triggerArray))
+        console.log("This is the position value"+trigger.position % 16);
+        playSound(audioBuffers[triggerArrays.indexOf(triggerArray)], time + ((trigger.position % 16) * semi) )
+      });
     });
 
 

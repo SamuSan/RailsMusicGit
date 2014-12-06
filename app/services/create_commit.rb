@@ -7,7 +7,9 @@ class CreateCommit
 
 	def call
 		commit = @project.commits.build(parent_commit: @commit)
-		@notes.each { |note| commit.notes.build(position:note["position"], duration: note["duration"], frequency: note["frequency"]) }
+		if !@notes.nil?
+			@notes.each { |note| commit.notes.build(position:note["position"], duration: note["duration"], frequency: note["frequency"]) }	
+		end
 		commit.save!
 	end
 end
