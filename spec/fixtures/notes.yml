@@ -1,6 +1,10 @@
-one : 
+note_one : 
  frequency : 330.00
  duration : 6 
-two : 
+ position : 3
+ commit_id : 1
+note_two : 
  frequency : 330.00
- duration : 6 
+ duration : 8
+ position : 3
+ commit_id : 2
