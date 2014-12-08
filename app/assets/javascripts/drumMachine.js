@@ -28,12 +28,8 @@ var DrumMachine = function() {
 
 DrumMachine.prototype.play = function(triggerArrays) {
   audioBuffers = [this.cymbal,this.cabasa, this.clave, this.cowbell, this.ohat, this.hihat, this.clap, this.snare,this.sidestick, this.kick];
-  // We'll start playing the rhythm 100 milliseconds from "now"
   var startTime = context.currentTime + 0.100;
-  // var tempo = 80; // BPM (beats per minute)
-  // var eighthNoteTime = (60 / tempo) / 2;
 
-  // Play 2 bars of the following:
   for (var bar = 0; bar < 4; bar++) {
     var time = startTime + bar * 16 * semi;
 
