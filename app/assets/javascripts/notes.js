@@ -1,7 +1,7 @@
 var player_notes = [];
 
 function Note (position, duration, frequency) {
-  this.position   = +position;
+  this.position   = +position;//Parse int get rid of the + ya gypo! Not clear
   this.duration   = duration;
   this.frequency  = frequency;
 }

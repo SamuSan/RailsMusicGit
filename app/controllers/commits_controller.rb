@@ -4,7 +4,12 @@ class CommitsController < ApplicationController
 	end
 
 	def show
-		
+		if request.xhr?	
+			notes_for_commit = []
+			notes_for_commit = Commit.where(project_id: params[:project_id], commit_number: params[:commit_number]).first.notes
+			
+			render json: notes_for_commit
+		end
 	end
 
 	def new
@@ -16,12 +21,10 @@ class CommitsController < ApplicationController
 			notes_to_be_committed  = JSON.parse(params[:notes]).compact!
 			@project = Project.find(params[:project_id])
 
-			if params[:parent_commit_id] 
-				parent_commit = Commit.find(params[:parent_commit_id])
-			end
-
+			parent_commit = @project.commits.last
 			CreateCommit.new(project: @project, commit: parent_commit, notes: notes_to_be_committed).call
-			render template: "projects/_project_commit_history"
+			@player = Player.new
+			render 'projects/_project_management'
 		end
 	end
 end

@@ -16,10 +16,12 @@ ActiveRecord::Schema.define(version: 20141130205354) do
   create_table "commits", force: true do |t|
     t.integer  "project_id",       null: false
     t.integer  "parent_commit_id"
+    t.integer  "commit_number",    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "commits", ["parent_commit_id"], name: "index_commits_on_parent_commit_id"
   add_index "commits", ["project_id"], name: "index_commits_on_project_id"
 
   create_table "notes", force: true do |t|

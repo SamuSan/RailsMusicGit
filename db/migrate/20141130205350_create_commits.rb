@@ -5,6 +5,9 @@ class CreateCommits < ActiveRecord::Migration
       t.index :project_id
 
       t.integer :parent_commit_id
+      t.index :parent_commit_id
+
+      t.integer :commit_number, null: false
       t.timestamps
     end
   end

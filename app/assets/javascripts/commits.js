@@ -1,24 +1,25 @@
 var projectId;
 var lastCommitId;
-var currentCommitId;
+var lastCommitNumber;
+var currentCommitNumber;
 
 $(function(){
   projectId = $("meta[property=projectId]").attr("content");
   lastCommitId = $("meta[property=lastCommitId]").attr("content");
+  lastCommitNumber = $("meta[property=lastCommitNumber]").attr("content");
   currentCommitId = lastCommitId;
+  currentCommitNumber = lastCommitNumber;
 
-  getNotesForCurrentCommit(currentCommitId);
+  getNotesForCommit(currentCommitNumber);
 
   $('.commit_button').on('click', function(e){
     $.ajax({
     	type: 'POST',
     	url: '/projects/'+projectId+'/commits' ,
     	data: {"project_id": projectId,
-    		     "notes" : JSON.stringify(player_notes),
-    		     "parent_commit_id" : lastCommitId  }
+    		     "notes" : JSON.stringify(player_notes)
+      }
     }).done(function(result){
-      currentCommitId = lastCommitId;
-      updateCommitsLabel();
       $("#commit-history").html(result);
     }).fail(function(error){
     	console.log(error);
@@ -27,27 +28,29 @@ $(function(){
 
   $('.forward_button').on('click', function(){
     console.log("FORWARD SPOT");
-    if (currentCommitId != lastCommitId) {
-      currentCommitId++;
-      getNotesForCurrentCommit(currentCommitId);
+    if (currentCommitNumber != lastCommitNumber) {
+      currentCommitNumber++;
+      getNotesForCommit(currentCommitNumber);
     };
   });
 
   $('.back_button').on('click', function(){
     console.log("BACKWARD SPOT");
-    if (currentCommitId > 1) {
-      currentCommitId--;
-      getNotesForCurrentCommit(currentCommitId);
+    if (currentCommitNumber > 1) {
+      currentCommitNumber--;
+      getNotesForCommit(currentCommitNumber);
     };
   });    
 });
 
-function getNotesForCurrentCommit(commitId){
+function getNotesForCommit(commitNumber){
+  player_notes = [];
   $.ajax({
     type: 'GET',
-    url: '/projects/'+projectId+'/commits/'+ commitId + '/notes'
+    url: '/projects/'+projectId+'/commits/' + lastCommitId,
+    data: {"commit_number" : commitNumber, "project_id" : projectId}
   }).done(function(result){
-    console.log(result);
+    console.log(result)
       addNotesForCurrentCommit(result);
       updateCommitsLabel();
       render_grid();
@@ -57,6 +60,5 @@ function getNotesForCurrentCommit(commitId){
 }
 
 function updateCommitsLabel(){
-  console.log("Updfating the labels")
-  $('.controls_commits_label').text("Current Commit: " + currentCommitId);
+  $('.controls_commits_label').text("Current Commit: " + (parseInt(currentCommitNumber)));
 }

@@ -35,14 +35,14 @@ DrumMachine.prototype.play = function(triggerArrays) {
   for (var bar = 0; bar < 4; bar++) {
     var time = startTime + bar * 16 * semi;
 
-    triggerArrays.forEach(function(triggerArray) { 
-      triggerArray.forEach(function(trigger){
-        console.log(audioBuffers[triggerArrays.indexOf(triggerArray)])
-        console.log("THIS IS THE INDED " + triggerArrays.indexOf(triggerArray))
-        console.log("This is the position value "+trigger.position % 16);
-        playSound(audioBuffers[triggerArrays.indexOf(triggerArray)], time + ((trigger.position % 16) * semi) )
-      });
-    });
+    // triggerArrays.forEach(function(triggerArray) { 
+    //   triggerArray.forEach(function(trigger){
+    //     console.log(audioBuffers[triggerArrays.indexOf(triggerArray)])
+    //     console.log("THIS IS THE INDED " + triggerArrays.indexOf(triggerArray))
+    //     console.log("This is the position value "+trigger.position % 16);
+    //     playSound(audioBuffers[triggerArrays.indexOf(triggerArray)], time + ((trigger.position % 16) * semi) )
+    //   });
+    // });
 
 
     

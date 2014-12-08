@@ -4,9 +4,9 @@ class ProjectsController < ApplicationController
 	end
 
 	def show
-		@player 			= Player.new
-		@project 			= Project.find(params[:id])
-		@last_commit 	= @project.commits.last
+		@player = Player.new
+		@project = Project.find(params[:id])
+		@last_commit = @project.commits.last
 	end
 
 	def new
@@ -14,9 +14,9 @@ class ProjectsController < ApplicationController
 	end
 
 	def create
-		service = CreateProject.new(project_params)
+		project = CreateProject.new(project_params).call
 		
-		if project = service.call
+		if project
 			redirect_to project
 		else
 			flash[:alert] = "Project creation failed"

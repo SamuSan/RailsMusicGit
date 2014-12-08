@@ -7,7 +7,7 @@ class CreateProject
 		Project.transaction do
 			project = Project.new(@project_params)
 	    if project.save
-		    project.commits.create!
+		    project.commits.create!(commit_number: 1, notes: [])
 	    	project
 	    end
 	  end

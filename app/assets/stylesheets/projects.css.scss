@@ -28,7 +28,7 @@
 ///////////////////
 .home_button{
   border-radius: 3px; 
-  margin: 0px 0px 0px 5px;
+  margin: 0px 0px 0px 0px;
   background-color: #aaaaaa;
   font-family: 'Varela', sans-serif; 
 }
@@ -43,10 +43,6 @@
 .note_button:hover{
 	border-radius: 10px;
 }
-.project_management_div, .player_transport_div{
-	// background-color: #bbbbbb;
-	// width: 50%;
-}
 .commit_button, .revert_button, .clear_all_button, .forward_button, .back_button{
 	border-radius: 10px;
 }
@@ -56,12 +52,21 @@
 .controls_label, .project_nav_bar{
   font-size: 2em;
   font-family: 'Varela', sans-serif; 
-  margin:5px 0px 10px 0px ;
+  margin:5px 0px 10px 0px;
+
   .controls_commits_label{
     font-size: 0.5em;
     font-weight: 500;
   }
 }
+.project_nav_bar{
+  font-size: 3em;    
+  font-weight: 900;
+}
+.project_nav_bar_table{
+  margin: 0px 0px 2% 0px;
+}
+
 .control_span{
   margin: 0px 2px 0px 5px;
 }
