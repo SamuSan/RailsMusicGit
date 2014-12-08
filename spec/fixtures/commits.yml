@@ -1,5 +1,14 @@
 commit_one:
  id: 1
+ project_id: 1
+ commit_number: 1
 
 commit_two:
  id: 2
+ project_id: 1
+ commit_number: 2
+
+commit_three:
+ id: 3
+ project_id: 1
+ commit_number: 3
