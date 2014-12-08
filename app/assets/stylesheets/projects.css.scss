@@ -2,13 +2,12 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .main_container{
-  width: 60%;
+  width: 53%;
   margin: 0 auto;
 }
 .page_div{
   margin: 0px 0px 60px 0px
 }
-
 
 //Maybe dont need this shiz?????
 .play_button{
@@ -27,7 +26,16 @@
   fill:#e23853;
 }
 ///////////////////
-
+.home_button{
+  border-radius: 3px; 
+  margin: 0px 0px 0px 5px;
+  background-color: #aaaaaa;
+  font-family: 'Varela', sans-serif; 
+}
+.player_div{
+  // display: block;
+  margin: 0px 5px 0px 5px;
+}
 .note_button{
   margin: 3px 1px 3px 1px;
 	border-radius: 5px;
@@ -36,12 +44,26 @@
 	border-radius: 10px;
 }
 .project_management_div, .player_transport_div{
-	background-color: #bbbbbb;
+	// background-color: #bbbbbb;
 	// width: 50%;
 }
-.commit_button, .revert_button, .clear_all_button{
+.commit_button, .revert_button, .clear_all_button, .forward_button, .back_button{
 	border-radius: 10px;
-
+}
+.control_labels_row{
+  margin: 0px 10px 0px 10px;
+}
+.controls_label, .project_nav_bar{
+  font-size: 2em;
+  font-family: 'Varela', sans-serif; 
+  margin:5px 0px 10px 0px ;
+  .controls_commits_label{
+    font-size: 0.5em;
+    font-weight: 500;
+  }
+}
+.control_span{
+  margin: 0px 2px 0px 5px;
 }
 .btn-commit_history{
   font-family: 'Varela', sans-serif;

@@ -29,5 +29,4 @@ function addNotesForCurrentCommit(notes_for_commit){
   _.each(notes_for_commit, function(note){
     player_notes[note.position] = note;
   });
-  render_grid();  
 }

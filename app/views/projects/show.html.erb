@@ -4,16 +4,28 @@
 
 <div class="page_div">
   <container class="col-md-12">
-    <div class="main_container">
-      <%= render 'project_player' %> 
-      <%= render 'player_transport' %> 
-      <%= render 'project_management' %>
-    </div>
-
+      <div class="main_container">
+      <%= render 'project_header' %>
+          <%= render 'project_player' %> 
+            <table>
+              <tr>
+                <td class="col-md-2 control_labels_row">
+                  <label class="controls_label">Transport</label>
+                </td>
+                <td class="col-md-2 control_labels_row">
+                  <label class="controls_label">Commits</label>
+                </td>
+              </tr>
+              <tr>
+                <td class="col-md-2 control_labels_row">
+                  <%= render 'player_transport' %> 
+                
+                </td>
+                <td class="col-md-2 control_labels_row  ">
+                  <%= render 'project_management' %>  
+                </td>
+              </tr>
+            </table>
+      </div>
   </container>
-  
-<!--   <container id="commit-history" class="col-md-2">
-    <%= render 'project_commit_history' %>
-  </container> -->
-
 </div>
