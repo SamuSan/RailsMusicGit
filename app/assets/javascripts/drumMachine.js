@@ -5,7 +5,9 @@ var semi;
 
 $(function(){
   tempo =  $("meta[property=projectTempo]").attr("content");
+  console.log(tempo);
   beat = 60 / tempo;
+  console.log(beat);
   semi = beat / 16.0;
 });
 
@@ -33,16 +35,27 @@ DrumMachine.prototype.play = function(triggerArrays) {
 
   // Play 2 bars of the following:
   for (var bar = 0; bar < 4; bar++) {
-    var time = startTime + bar * 16 * semi;
+console.log("INIT");
 
+    var time = startTime + bar * 8 * semi;
+
+    for(var click = 0; click < 16; click++){
+      triggerArrays.forEach(function(triggerArray) { 
+        triggerArray.forEach(function(trigger){
+          console.log(trigger)
+          if(trigger.position == click){
+            console.log("PLaying")
+            playSound(audioBuffers[triggerArrays.indexOf(triggerArray)]) 
+          }
+        })
+      });
+    }
     // triggerArrays.forEach(function(triggerArray) { 
     //   triggerArray.forEach(function(trigger){
     //     console.log(audioBuffers[triggerArrays.indexOf(triggerArray)])
     //     console.log("THIS IS THE INDED " + triggerArrays.indexOf(triggerArray))
     //     console.log("This is the position value "+trigger.position % 16);
     //     playSound(audioBuffers[triggerArrays.indexOf(triggerArray)], time + ((trigger.position % 16) * semi) )
-    //   });
-    // });
 
 
     
@@ -61,4 +74,12 @@ DrumMachine.prototype.play = function(triggerArrays) {
     // }
   }
 };
+
+function playSound(buffer, time) {
+  var source = context.createBufferSource();
+  source.buffer = buffer;
+  source.connect(context.destination);
+  source.start();
+  // source[source.start ? 'start' : 'noteOn'](time);
+}
 
