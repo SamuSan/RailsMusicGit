@@ -4,12 +4,13 @@
 .main_container{
   width: 53%;
   margin: 0 auto;
+  .warning{
+    color:#e23853;
+  }
 }
 .page_div{
   margin: 0px 0px 60px 0px
 }
-
-//Maybe dont need this shiz?????
 .play_button{
   fill:#040f24;
 }
@@ -25,7 +26,6 @@
 .stop_button_active{
   fill:#e23853;
 }
-///////////////////
 .home_button{
   border-radius: 3px; 
   margin: 0px 0px 0px 0px;
@@ -33,7 +33,6 @@
   font-family: 'Varela', sans-serif; 
 }
 .player_div{
-  // display: block;
   margin: 0px 5px 0px 5px;
 }
 .note_button{
@@ -63,24 +62,22 @@
   font-size: 3em;    
   font-weight: 900;
 }
+.index_title{
+  margin: 100px 0px 40px 10px;
+  font-size: 5em;
+}
+.index_project{
+  margin: 5px 0px 5px 0px;
+  font-size: 1.5em;
+}
+.new_project{
+  margin: 10px 0px 50px 15px;
+  font-size: 1.5em;
+}
 .project_nav_bar_table{
   margin: 0px 0px 2% 0px;
 }
 
 .control_span{
   margin: 0px 2px 0px 5px;
-}
-.btn-commit_history{
-  font-family: 'Varela', sans-serif;
-  background-color: #9dcdeb;
-  border-color: #aaaaaa;
-
-}
-.btn-commit_history:active{
-  background-color: #e23853;
-  border-color: #aaaaaa;
-}
-.btn-commit_history:focus{
-  background-color: #e23853;
-  border-color: #aaaaaa;
 }

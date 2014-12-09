@@ -1,30 +1,22 @@
 class CommitsController < ApplicationController
-	def index
-		
-	end
+	def index;end
 
 	def show
-		if request.xhr?	
-			notes_for_commit = []
-			notes_for_commit = Commit.where(project_id: params[:project_id], commit_number: params[:commit_number]).first.notes
-			
-			render json: notes_for_commit
-		end
+		notes_for_commit = Commit.where(project_id: params[:project_id], commit_number: params[:id]).first!.notes
+		render json: notes_for_commit
 	end
 
 	def new
-		
 	end
 
 	def create
-		if request.xhr?
-			notes_to_be_committed  = JSON.parse(params[:notes]).compact!
-			@project = Project.find(params[:project_id])
-
-			parent_commit = @project.commits.last
-			CreateCommit.new(project: @project, commit: parent_commit, notes: notes_to_be_committed).call
+		begin
+			CreateCommit.new(project_id: params[:project_id], notes: params[:notes]).call
 			@player = Player.new
 			render 'projects/_project_management'
+		rescue ActiveRecord::RecordNotFound
+			flash[:alert] = "Project with ID #{params[:project_id]} not found"
+			redirect_to projects_path
 		end
 	end
 end

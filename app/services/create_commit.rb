@@ -1,12 +1,12 @@
 class CreateCommit
-	def initialize(project: project, commit: nil, notes: nil) 
-		@project  = project
-		@commit = commit
-		@notes = notes.to_a
+	def initialize(project_id: project_id, notes: nil) 
+		@project  = Project.find(project_id)
+		@parent_commit = @project.commits.last;
+		@notes = notes.present? ? JSON.parse(notes).compact : notes.to_a;
 	end
 
 	def call
-		commit = @project.commits.build(parent_commit: @commit, commit_number: (@commit.commit_number +  1))
+		commit = @project.commits.build(parent_commit: @parent_commit, commit_number: (@parent_commit.commit_number +  1))
 		@notes.each { |note| commit.notes.build(position:note["position"], duration: note["duration"], frequency: note["frequency"]) }	
 		commit.save!
 	end

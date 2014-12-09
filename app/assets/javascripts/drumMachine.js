@@ -1,18 +1,13 @@
+
 var SAMPLE_PATH = "../assets/"
-var tempo;
+var tempo       = $("meta[property=projectTempo]").attr("content");
+var beat        = 60 / tempo;
 var audioBuffers;
-var semi;
+var semi        = beat / 4 ;
 
-$(function(){
-  tempo =  $("meta[property=projectTempo]").attr("content");
-  console.log(tempo);
-  beat = 60 / tempo;
-  console.log(beat);
-  semi = beat / 4;
-});
+var  DrumMachine = function() {
 
-var DrumMachine = function() {
-  loadSounds(this, {
+SamplerSetup.loadSounds(this, {
     cymbal:   SAMPLE_PATH + "ridecym808.wav",
     cabasa:   SAMPLE_PATH + "cabasa808.wav",
     clave :   SAMPLE_PATH + "clave808.wav",
@@ -26,11 +21,13 @@ var DrumMachine = function() {
   });
 };
 
-DrumMachine.prototype.play = function(triggerArrays) {
-  audioBuffers = [this.cymbal,this.cabasa, this.clave, this.cowbell, this.ohat, this.hihat, this.clap, this.snare,this.sidestick, this.kick];
+DrumMachine.prototype.play = function() {
+  var triggerArrays = PlayerSequencer.prepareNotesArray(Notes.notesInPlayer());
+  audioBuffers = [this.cymbal, this.cabasa, this.clave, this.cowbell, this.ohat, this.hihat, this.clap, this.snare,this.sidestick, this.kick];
   var startTime = context.currentTime + 0.100;
 
   for (var bar = 0; bar < 4; bar++) {
+    var triggerArrays = PlayerSequencer.prepareNotesArray(player_notes);
     var time = startTime + bar * 16 * semi;
 
     triggerArrays.forEach(function(triggerArray) { 
@@ -41,10 +38,9 @@ DrumMachine.prototype.play = function(triggerArrays) {
   }
 };
 
-function playSound(buffer, time) {
+this.playSound = function (buffer, time) {
   var source = context.createBufferSource();
   source.buffer = buffer;
   source.connect(context.destination);
   source[source.start ? 'start' : 'noteOn'](time);
 }
-

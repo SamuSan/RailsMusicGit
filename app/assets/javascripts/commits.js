@@ -15,10 +15,8 @@ $(function(){
   $('.commit_button').on('click', function(e){
     $.ajax({
     	type: 'POST',
-    	url: '/projects/'+projectId+'/commits' ,
-    	data: {"project_id": projectId,
-    		     "notes" : JSON.stringify(player_notes)
-      }
+    	url: '/projects/'+ projectId +'/commits' ,
+    	data: { "notes" : JSON.stringify(Notes.notesInPlayer()) }
     }).done(function(result){
       $("#commit-history").html(result);
     }).fail(function(error){
@@ -47,13 +45,12 @@ function getNotesForCommit(commitNumber){
   player_notes = [];
   $.ajax({
     type: 'GET',
-    url: '/projects/'+projectId+'/commits/' + lastCommitId,
-    data: {"commit_number" : commitNumber, "project_id" : projectId}
+    url: '/projects/'+ projectId + '/commits/' + commitNumber 
   }).done(function(result){
     console.log(result)
-      addNotesForCurrentCommit(result);
-      updateCommitsLabel();
-      render_grid();
+      Notes.addNotesForCurrentCommit(result);
+      updateCommitsLabel(); 
+      Player.renderGrid();
   }).fail(function(error){
       console.log("An error occured" + error);
   });

@@ -3,6 +3,8 @@ require 'rails_helper'
 RSpec.describe ProjectsController, type: :controller do
   fixtures :projects
 
+  let(:project) { projects(:with_title) }
+
   describe "POST create" do
     let(:create_project) { instance_double(CreateProject) }
 
@@ -33,7 +35,6 @@ RSpec.describe ProjectsController, type: :controller do
       it "redirects to the project index page" do
         post :create, :project => {:title => "", :tempo => "120"}
         expect(response).to redirect_to(projects_path)
-        # expect(request.flash.alert).to eq "Project creation failed"
       end
     end
   end
@@ -41,8 +42,15 @@ RSpec.describe ProjectsController, type: :controller do
   describe "GET show" do
     context "when the show action is successful" do
       it "redirects to the show page for the given project id" do
-        get :show, :id => 1
+        get :show, :id => project.id
         expect(response).to render_template(:show)
+      end
+    end
+
+    context "when the show action fails" do
+      it "redirects to the index page" do
+        get :show, :id => 1000
+        expect(response).to redirect_to(projects_path)
       end
     end
   end
