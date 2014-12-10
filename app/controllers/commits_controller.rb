@@ -11,7 +11,7 @@ class CommitsController < ApplicationController
 
 	def create
 		begin
-			CreateCommit.new(project_id: params[:project_id], notes: params[:notes]).call
+			CreateCommit.new(project_id: params[:project_id], branch_name: params[:branch_name], notes: params[:notes]).call
 			project = Project.find(params[:project_id])
 			@player = Player.new
 			render partial: 'projects/project_management'

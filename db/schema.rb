@@ -14,9 +14,13 @@
 ActiveRecord::Schema.define(version: 20141210020427) do
 
   create_table "branches", force: true do |t|
+    t.integer  "project_id"
+    t.string   "branch_name", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "branches", ["project_id"], name: "index_branches_on_project_id"
 
   create_table "commits", force: true do |t|
     t.integer  "project_id",       null: false

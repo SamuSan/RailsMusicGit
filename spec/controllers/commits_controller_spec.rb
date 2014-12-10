@@ -13,7 +13,7 @@ RSpec.describe CommitsController, type: :controller do
     context "when the commit is successfully created" do
       it "renders the project management template" do
         expect {
-          xhr :post, :create, project_id: project.id, notes: notes
+          xhr :post, :create, project_id: project.id, branch_name: "harry", notes: notes
           expect(response).to render_template("projects/_project_management")
         }.to change(Commit, :count).by 1
       end

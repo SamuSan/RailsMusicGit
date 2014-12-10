@@ -1,7 +1,8 @@
 class CreateCommit
-	def initialize(project_id: project_id, notes: nil) 
+	def initialize(project_id:, branch_name:, notes: nil) 
 		@project  = Project.find(project_id)
-		@parent_commit = @project.commits.last;
+		@branch = Branch.where(project_id: @project.id, branch_name: branch_name)
+		@parent_commit = @branch.commits.last;
 		@notes = notes.present? ? JSON.parse(notes).compact : notes.to_a;
 	end
 

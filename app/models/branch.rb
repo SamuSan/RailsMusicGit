@@ -1,2 +1,7 @@
 class Branch < ActiveRecord::Base
+  belongs_to :project
+
+  has_many :commits
+
+  validates :branch_name, presence: true
 end
