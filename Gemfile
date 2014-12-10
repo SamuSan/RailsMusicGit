@@ -32,8 +32,13 @@ gem 'binding_of_caller'
 
 gem 'pry-byebug'
 
+gem 'devise'
+
+
 group :development, :test do
-  gem 'rspec-rails', '~> 3.0'  
+  gem 'rspec-rails', '~> 3.0'
+
+  gem 'guard'  
 end
 
 gem 'twitter-bootstrap-rails'

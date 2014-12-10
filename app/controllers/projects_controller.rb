@@ -7,6 +7,7 @@ class ProjectsController < ApplicationController
 		@player = Player.new
 		begin
 			@project = Project.find(params[:id])
+			@commits = Commit.all.where(project_id: @project.id).order(:commit_number)
 			@last_commit = @project.commits.last
 		rescue ActiveRecord::RecordNotFound
 			flash[:alert] = "Project with id #{params[:id]} not found!"

@@ -18,7 +18,10 @@ $(function(){
     	url: '/projects/'+ projectId +'/commits' ,
     	data: { "notes" : JSON.stringify(Notes.notesInPlayer()) }
     }).done(function(result){
-      $("#commit-history").html(result);
+      lastCommitNumber++;
+      currentCommitNumber = lastCommitNumber;
+      $("#project_management_div").html(result);
+      updateCommitsLabel();
     }).fail(function(error){
     	console.log(error);
 		});	
@@ -49,7 +52,7 @@ function getNotesForCommit(commitNumber){
   }).done(function(result){
     console.log(result)
       Notes.addNotesForCurrentCommit(result);
-      updateCommitsLabel(); 
+      updateCommitsLabel(); //arg
       Player.renderGrid();
   }).fail(function(error){
       console.log("An error occured" + error);
@@ -57,5 +60,5 @@ function getNotesForCommit(commitNumber){
 }
 
 function updateCommitsLabel(){
-  $('.controls_commits_label').text("Current Commit: " + (parseInt(currentCommitNumber)));
+  $('.controls_commits_span').text("Current Commit: " + (parseInt(currentCommitNumber)));
 }

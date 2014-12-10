@@ -1,11 +1,10 @@
 window.PlayerSequencer = new function() {
   this.runSequencer = function() {
-      var eightOhEight = new DrumMachine();
-    eightOhEight.play();
+    DrumMachine.play(); 
   };
 
   this.stopSequencer = function() {
-    console.log("Stop");
+    DrumMachine.stopPlaying();
   };
 
   this.prepareNotesArray = function(playerNotes) {

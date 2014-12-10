@@ -37,14 +37,12 @@ window.SamplerSetup = new function(){
         obj[name] = buffer;
       }
       if (callback) {
+        console.log("gota call back booty");
         callback();
       }
     });
     bufferLoader.load();
   }
-
-
-
 
   function BufferLoader(context, urlList, callback) {
     this.context = context;

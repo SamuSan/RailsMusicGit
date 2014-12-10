@@ -10,12 +10,20 @@ window.Player = new function(){
     });
 
     $('.stop_button').on('click', function(e){
-      stopSequencer();
+      PlayerSequencer.stopSequencer();
     });
 
     $('.clear_all_button').on('click', function(e){
       Notes.clearAll();
       render();
+    });
+
+    $(document).keypress(function(e){
+      if(e.which == 32 && !DrumMachine.isPlaying()) {
+        $('.play_button').click();
+      }else { 
+        $('.stop_button').click();
+      };
     }); 
   });
 

@@ -17,9 +17,12 @@ RSpec.describe CreateCommit do
       end
     end
 
-    pending "Soooon"
     context "a commit is saved to the db" do
-
+      it "increases the commit count by one" do
+        expect {
+          CreateCommit.new(project_id: project.id, notes:[]).call
+        }.to change(Commit, :count).by 1
+      end
     end
   end
 end
