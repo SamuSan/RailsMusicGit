@@ -2,8 +2,8 @@ class CommitsController < ApplicationController
 	def index;end
 
 	def show
-		notes_for_commit = Commit.where(project_id: params[:project_id], commit_number: params[:id]).first!.notes
-		render json: notes_for_commit
+		commit = Commit.where(project_id: params[:project_id], id: params[:id]).first!.notes
+		render json: commit
 	end
 
 	def new
@@ -11,8 +11,7 @@ class CommitsController < ApplicationController
 
 	def create
 		begin
-			CreateCommit.new(project_id: params[:project_id], branch_name: params[:branch_name], notes: params[:notes]).call
-			project = Project.find(params[:project_id])
+			CreateCommit.new(branch_id: params[:branch_id], notes: params[:notes]).call
 			@player = Player.new
 			render partial: 'projects/project_management'
 		rescue ActiveRecord::RecordNotFound

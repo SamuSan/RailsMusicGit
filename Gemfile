@@ -38,7 +38,7 @@ gem 'devise'
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
 
-  gem 'guard'  
+  gem 'guard-rspec'  
 end
 
 gem 'twitter-bootstrap-rails'

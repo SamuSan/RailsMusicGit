@@ -7,8 +7,10 @@ Rails.application.routes.draw do
   # resources :commits
 
   resources :projects do 
-    resources :commits do #will render commits under project
-      resources :notes
+    resources :branches do
+      resources :commits do #will render commits under project
+        resources :notes
+      end
     end
   end
 #nested = shallow tre, leaves out superfluous IDs

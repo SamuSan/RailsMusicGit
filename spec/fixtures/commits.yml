@@ -1,14 +1,11 @@
 commit_one:
- project_id: with_title
+ project: with_title
  parent_commit: nil
- commit_number: 1
 
 commit_two:
- project_id: with_title
+ project: with_title
  parent_commit: commit_one
- commit_number: 2
 
 commit_three:
- project_id: with_title
+ project: with_title
  parent_commit: commit_two
- commit_number: 3
