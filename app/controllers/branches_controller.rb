@@ -4,7 +4,9 @@ class BranchesController < ApplicationController
   end
 
   def show
-    render json: Branch.find(params[:branch_id])
+    branch = Branch.where(branch_name:params[:id]).first!
+
+    render json: branch
   end
 
   def create
