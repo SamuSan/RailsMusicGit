@@ -20,11 +20,15 @@ RSpec.describe CreateBranch do
             CreateBranch.new(branch_name: "Sausage", from_commit: commit).call
             }.to change(Branch, :count).by 1
         end
+
         it "the new branch points at a new commit" do
-         
+          new_branch = CreateBranch.new(branch_name: "Sausage", from_commit: commit).call
+          expect(new_branch.head_commit.id).not_to be_nil
         end
-        it "the new commit points to the passed commit as a parent" do
-         
+
+        it "points the head_commit to the passed commit as a parent" do
+          new_branch = CreateBranch.new(branch_name: "Sausage", from_commit: commit).call
+          expect(new_branch.head_commit.parent_commit_id).to eq commit.id
         end
       end
     end

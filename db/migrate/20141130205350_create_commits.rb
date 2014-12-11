@@ -7,7 +7,7 @@ class CreateCommits < ActiveRecord::Migration
 
       t.text :comments
 
-      t.integer :parent_commit_id
+      t.integer :parent_commit_id, null: false
       t.index :parent_commit_id
       t.timestamps
     end

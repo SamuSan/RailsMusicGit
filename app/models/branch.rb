@@ -3,4 +3,8 @@ class Branch < ActiveRecord::Base
 
   validates :branch_name, presence: true
   validates :head_commit_id, presence: true
+
+  def move_forward_one_commit(id_for_current_commit)
+
+  end
 end

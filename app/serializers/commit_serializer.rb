@@ -1,3 +1,5 @@
 class CommitSerializer < ActiveModel::Serializer
-  attributes :id, :notes, :number
+  attributes :id
+
+  has_many :notes
 end

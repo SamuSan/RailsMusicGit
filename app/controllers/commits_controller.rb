@@ -1,8 +1,13 @@
 class CommitsController < ApplicationController
-	def index;end
+	def index
+	end
 
 	def show
-		commit = Commit.where(project_id: params[:project_id], id: params[:id]).first!.notes
+		#are we going backward or forward?
+		#if backward we can just send back the parent
+		commit = Commit.where(project_id: params[:project_id], id: params[:id]).first!
+
+		
 		render json: commit
 	end
 
