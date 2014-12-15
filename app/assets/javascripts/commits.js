@@ -14,7 +14,8 @@ $(function(){
     $.ajax({
     	type: 'POST',
     	url: '/projects/'+ projectId + '/branches/' + currentBranchId +'/commits' ,
-    	data: { "notes" : JSON.stringify(Notes.notesInPlayer()) }
+    	data: { "notes" : JSON.stringify(Notes.notesInPlayer()),
+              "comments" : $('#commit_comments').val() }
     }).done(function(result){
       $("#project_management_div").html(result);
       updateCommitsLabel();
@@ -24,7 +25,6 @@ $(function(){
   });
 
   $('.forward_button').on('click', function(){
-    console.log("FORWARD SPOT");
     if (currentCommitNumber != lastCommitNumber) {
       currentCommitNumber++;
       getNotesForCommit(currentCommitNumber);
@@ -32,11 +32,7 @@ $(function(){
   });
 
   $('.back_button').on('click', function(){
-    console.log("BACKWARD SPOT");
-    if (currentCommitNumber > 1) {
-      currentCommitNumber--;
-      getNotesForCommit(currentCommitNumber);
-    };
+    
   });    
 });
 
@@ -46,7 +42,6 @@ function getNotesForCommit(id){
     type: 'GET',
     url: '/projects/'+ projectId + '/branches/' + currentBranchId +   '/commits/' + id 
   }).done(function(result){
-    console.log(result)
       Notes.addNotesForCurrentCommit(result["commit"]["notes"]);
       updateCommitsLabel(); //arg
       Player.renderGrid();

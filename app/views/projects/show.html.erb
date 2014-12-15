@@ -13,23 +13,30 @@
                 <span class="controls_span">Transport</span>
               </td>
               <td class="col-md-1 control_spans_row">
-                <span class="controls_span">Commits</span>
+                <span class="controls_span">Commit</span>
               </td>
               <td class="col-md-1 control_spans_row">
-                <span class="controls_span">Branch</span>
+                <span class="branches_span">
+                Branch:
+                 <%= @current_branch.branch_name.titleize %>
+                </span>
               </td>
             </tr>
             <tr>
               <td class="col-md-1 control_spans_row">
                 <%= render 'player_transport' %> 
-              
               </td>
               <td class="col-md-1 control_spans_row  ">
                 <%= render 'project_management' %>  
               </td>
-              <td class="col-md-1 control_spans_row">
-                <%= render 'project_branches' %>
+              <td class="col-md-1 control_spans_row  ">
+                <%= render 'project_branches_nav' %>
               </td>
+            </tr>
+            <tr>
+              <td class="col-md-1 control_spans_row  "></td>
+              <td class="col-md-1 control_spans_row  "><input type="text" class="form-control" id="commit_comments" placeholder="Comments... "></td>
+              <td class="col-md-1 control_spans_row  "></td>
             </tr>
           </table>
       </div>

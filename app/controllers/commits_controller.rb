@@ -12,8 +12,7 @@ class CommitsController < ApplicationController
 
 	def create
 		begin
-			require 'pry-byebug'; binding.pry
-			CreateCommit.new(branch_id: params[:branch_id], notes: params[:notes]).call
+			CreateCommit.new(branch_id: params[:branch_id], notes: params[:notes], comments: params[:comments]).call
 			@player = Player.new
 			render partial: 'projects/project_management'
 		rescue ActiveRecord::RecordNotFound

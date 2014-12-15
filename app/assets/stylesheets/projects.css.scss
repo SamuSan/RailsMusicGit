@@ -42,7 +42,7 @@
 .note_button:hover{
 	border-radius: 10px;
 }
-.commit_button, .revert_button, .clear_all_button, .forward_button, .back_button{
+.commit_button, .revert_button, .clear_all_button, .forward_button, .back_button, .add_branch_button{
 	border-radius: 10px;
 }
 .control_spans_row{
@@ -57,6 +57,9 @@
     font-size: 0.9em;
     font-weight: 500;
   }
+}
+.branches_span{
+  font-size: 1.6em;
 }
 .project_nav_bar{
   font-size: 3em;    
