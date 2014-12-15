@@ -1,3 +1,6 @@
-branch_one:
-  head_commit: commit_one
-  branch_name: "Harry"
+branch_master:
+  head_commit: commit_three
+  branch_name: "master"
+branch_bingo:
+  head_commit: commit_two
+  branch_name: "bingo"

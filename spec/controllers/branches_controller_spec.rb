@@ -4,7 +4,7 @@ RSpec.describe BranchesController, :type => :controller do
   fixtures :projects, :branches, :commits
 
   let(:project)     { projects(:with_title)  }
-  let(:branch)      { branches(:branch_one) }
+  let(:branch)      { branches(:branch_master) }
   let(:commit_one)  { commits(:commit_one) }
 
 
@@ -21,7 +21,7 @@ RSpec.describe BranchesController, :type => :controller do
 
     it "returns the branch and its commits and notes in JSON" do
       xhr :get, :show, project_id: project.id, id: branch.branch_name
-      expect(parsed_body).to eq("branch" => {"id"=>509919642, "branch_name"=>"Harry", "head_commit_id"=>249911736})
+      expect(parsed_body).to eq("branch" => {"id"=> branch.id, "branch_name"=>branch.branch_name, "head_commit_id"=>branch.head_commit_id})
     end
   end
 end

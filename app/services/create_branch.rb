@@ -6,10 +6,7 @@ class CreateBranch
 
   def call
     Branch.transaction do
-      head_commit = Commit.create(project_id: @from_commit.project_id, parent_commit_id: @from_commit.id)
-      if head_commit
-        branch = Branch.create(branch_name: @branch_name, head_commit: head_commit)
-      end
+      branch = Branch.create(branch_name: @branch_name, head_commit: @from_commit)
     end
   end
 end

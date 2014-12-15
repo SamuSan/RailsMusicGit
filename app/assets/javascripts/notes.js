@@ -23,15 +23,14 @@ window.Notes = new function(){
         player_notes[position] = note;
   	  }
     }
+        console.log(player_notes)
   }; 
 
-  this.addNotesForCurrentCommit = function(notes_for_commit) {
+  this.addNotesForCurrentCommit = function(notes) {
     player_notes = [];
-    _.each(notes_for_commit, function(notes) {
       _.each(notes, function(note){
         player_notes[note.position] = note;
       });
-    });
   };
 
   this.notesInPlayer = function() { 

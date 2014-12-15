@@ -1,7 +1,7 @@
 <meta property="projectId" content="<%= @project.id %>">
 <meta property="projectTempo" content="<%= @project.tempo %>">
-<meta property="lastCommitId" content="<%= @last_commit.id %>">
-<meta property="lastCommitNumber" content="<%= @last_commit.commit_number %>">
+<meta property="currentBranchId" content="<%= @current_branch.id %>">
+<meta property="currentCommitId" content="<%= @current_commit_id %>">
 <div class="page_div">
   <container class="col-md-12">
       <div class="main_container">
@@ -9,20 +9,26 @@
         <%= render 'project_player' %> 
           <table>
             <tr>
-              <td class="col-md-2 control_labels_row">
-                <label class="controls_label">Transport</label>
+              <td class="col-md-1 control_spans_row">
+                <span class="controls_span">Transport</span>
               </td>
-              <td class="col-md-2 control_labels_row">
-                <label class="controls_label">Commits</label>
+              <td class="col-md-1 control_spans_row">
+                <span class="controls_span">Commits</span>
+              </td>
+              <td class="col-md-1 control_spans_row">
+                <span class="controls_span">Branch</span>
               </td>
             </tr>
             <tr>
-              <td class="col-md-2 control_labels_row">
+              <td class="col-md-1 control_spans_row">
                 <%= render 'player_transport' %> 
               
               </td>
-              <td class="col-md-2 control_labels_row  ">
+              <td class="col-md-1 control_spans_row  ">
                 <%= render 'project_management' %>  
+              </td>
+              <td class="col-md-1 control_spans_row">
+                <%= render 'project_branches' %>
               </td>
             </tr>
           </table>

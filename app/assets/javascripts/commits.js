@@ -1,25 +1,21 @@
 var projectId;
-var lastCommitId;
-var lastCommitNumber;
-var currentCommitNumber;
+var currentCommitId;
+var currentBranchId;
 
 $(function(){
   projectId = $("meta[property=projectId]").attr("content");
-  lastCommitId = $("meta[property=lastCommitId]").attr("content");
-  lastCommitNumber = $("meta[property=lastCommitNumber]").attr("content");
-  currentCommitId = lastCommitId;
-  currentCommitNumber = lastCommitNumber;
+  currentCommitId = $("meta[property=currentCommitId]").attr("content");
+  currentBranchId = $("meta[property=currentBranchId]").attr("content");
 
-  getNotesForCommit(currentCommitNumber);
+
+  getNotesForCommit(currentCommitId);
 
   $('.commit_button').on('click', function(e){
     $.ajax({
     	type: 'POST',
-    	url: '/projects/'+ projectId +'/commits' ,
+    	url: '/projects/'+ projectId + '/branches/' + currentBranchId +'/commits' ,
     	data: { "notes" : JSON.stringify(Notes.notesInPlayer()) }
     }).done(function(result){
-      lastCommitNumber++;
-      currentCommitNumber = lastCommitNumber;
       $("#project_management_div").html(result);
       updateCommitsLabel();
     }).fail(function(error){
@@ -44,14 +40,14 @@ $(function(){
   });    
 });
 
-function getNotesForCommit(commitNumber){
+function getNotesForCommit(id){
   player_notes = [];
   $.ajax({
     type: 'GET',
-    url: '/projects/'+ projectId + '/commits/' + commitNumber 
+    url: '/projects/'+ projectId + '/branches/' + currentBranchId +   '/commits/' + id 
   }).done(function(result){
     console.log(result)
-      Notes.addNotesForCurrentCommit(result);
+      Notes.addNotesForCurrentCommit(result["commit"]["notes"]);
       updateCommitsLabel(); //arg
       Player.renderGrid();
   }).fail(function(error){
@@ -60,5 +56,5 @@ function getNotesForCommit(commitNumber){
 }
 
 function updateCommitsLabel(){
-  $('.controls_commits_span').text("Current Commit: " + (parseInt(currentCommitNumber)));
+  // $('.controls_commits_span').text("Current Commit: " + (parseInt(currentCommitNumber)));
 }

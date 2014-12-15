@@ -6,7 +6,7 @@ RSpec.describe CreateCommit do
 
     let(:create_commit) { instance_double(CreateCommit) }
     let(:project)       { projects(:with_title) }
-    let(:branch)        { branches(:branch_one) }
+    let(:branch)        { branches(:branch_master) }
 
     context "the user trys to access a non existent project" do
       it "raises an error if the project id provided is not found" do

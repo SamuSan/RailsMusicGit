@@ -1,0 +1,14 @@
+<span class="controls_span">
+<%= @current_branch.branch_name.titleize %>
+</span>
+<div class="dropdown">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+    Branches
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+  <% @project_branchs.each do |branch| %>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><%= branch.branch_name %></a></li>
+    <% end %>
+  </ul>
+</div>

@@ -9,3 +9,7 @@ commit_two:
 commit_three:
  project: with_title
  parent_commit: commit_two
+
+commit_four:
+ project: with_title
+ parent_commit: commit_two

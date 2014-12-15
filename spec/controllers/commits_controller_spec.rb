@@ -4,11 +4,12 @@ RSpec.describe CommitsController, type: :controller do
   fixtures :projects, :branches, :commits, :notes
 
   let(:project)     { projects(:with_title) }
-  let(:branch)      { branches(:branch_one) }
+  let(:branch)      { branches(:branch_master) }
 
   describe "POST create" do
     let(:create_commit) { instance_double(CreateCommit) }
-    let(:note)          { Note.new(position: 16)}
+    let(:commit_three)  { commits(:commit_three) }
+    let(:note)          { Note.new(position: 16) }
     let(:notes)         { [note].to_json }
 
     context "when the commit is successfully created" do
@@ -21,6 +22,7 @@ RSpec.describe CommitsController, type: :controller do
 
       it "changes the current branch's head commit pointer to the newest commit" do
           xhr :post, :create, project_id: project.id, branch_id: branch.id, notes: notes
+
       end
     end
 
