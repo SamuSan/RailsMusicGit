@@ -18,7 +18,7 @@ $(function(){
               "comments" : $('#commit_comments').val() }
     }).done(function(result){
       $('#new_commit_comments').val('');
-      updateCommitsLabel();
+      updateCommitsLabel(result["commits"][0][1]);
     }).fail(function(error){
     	console.log(error);
 		});	

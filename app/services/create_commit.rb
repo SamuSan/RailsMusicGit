@@ -13,6 +13,7 @@ class CreateCommit
 			commit.save!
 			@branch.head_commit_id = commit.id
 			@branch.save!
+			commit
 		end
 	end
 end

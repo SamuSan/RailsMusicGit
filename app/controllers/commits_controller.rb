@@ -18,9 +18,13 @@ class CommitsController < ApplicationController
 
 	def create
 		begin
-			CreateCommit.new(branch_id: params[:branch_id], notes: params[:notes], comments: params[:comments]).call
+			commit = CreateCommit.new(branch_id: params[:branch_id], notes: params[:notes], comments: params[:comments]).call
 			@player = Player.new
-			render partial: 'projects/project_management'
+			commit_return = {
+				"commit_number" => FindCommitNumber.new(branch_id: params[:branch_id], commit: commit).call,
+				"commit" => commit
+			}
+			render json: commit_return
 		rescue ActiveRecord::RecordNotFound
 			flash[:alert] = "Project with ID #{params[:project_id]} not found"
 			redirect_to projects_path
