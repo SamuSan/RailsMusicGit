@@ -42,14 +42,14 @@ function getNotesForCommit(id){
     type: 'GET',
     url: '/projects/'+ projectId + '/branches/' + currentBranchId +   '/commits/' + id 
   }).done(function(result){
-      Notes.addNotesForCurrentCommit(result["commit"]["notes"]);
-      updateCommitsLabel(); //arg
+      Notes.addNotesForCurrentCommit(result["commits"][1][1]["notes"]);
+      updateCommitsLabel(result["commits"][0][1]);
       Player.renderGrid();
   }).fail(function(error){
       console.log("An error occured" + error);
   });
 }
 
-function updateCommitsLabel(){
-  $('.controls_commits_span').text((parseInt(2)));
+function updateCommitsLabel(commitNumber){
+  $('.controls_commits_span').text((parseInt(commitNumber)));
 }

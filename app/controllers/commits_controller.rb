@@ -1,10 +1,16 @@
 class CommitsController < ApplicationController
+	require 'commits_helper'
+	
 	def index
 	end
 
 	def show
 		commit = Commit.where(project_id: params[:project_id], id: params[:id]).first!
-		render json: commit
+		commit_return = {
+			"commit_number" => FindCommitNumber.new(branch_id: params[:branch_id], commit: commit).call,
+			"commit" => commit
+		}
+		render json: commit_return
 	end
 
 	def new
