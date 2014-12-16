@@ -1,9 +1,9 @@
 class CreateCommit
 	def initialize(branch_id:, notes: nil, comments:) 
-		@branch = Branch.find(branch_id)
-		@comments  = comments
-		@parent_commit = Commit.find(@branch.head_commit_id)
-		@notes = notes.present? ? JSON.parse(notes).compact : notes.to_a
+		@branch 				= Branch.find(branch_id)
+		@comments  			= comments
+		@parent_commit 	= Commit.find(@branch.head_commit_id)
+		@notes 					= notes.present? ? JSON.parse(notes).compact : notes.to_a
 	end
 
 	def call

@@ -1,7 +1,7 @@
 <meta property="projectId" content="<%= @project.id %>">
 <meta property="projectTempo" content="<%= @project.tempo %>">
 <meta property="currentBranchId" content="<%= @current_branch.id %>">
-<meta property="currentCommitId" content="<%= @current_commit_id %>">
+<meta property="currentCommitId" content="<%= @current_branch.head_commit_id %>">
 <div class="page_div">
   <container class="col-md-12">
       <div class="main_container">
@@ -17,8 +17,6 @@
               </td>
               <td class="col-md-1 control_spans_row">
                 <span class="branches_span">
-                Branch:
-                 <%= @current_branch.branch_name.titleize %>
                 </span>
               </td>
             </tr>
@@ -35,8 +33,13 @@
             </tr>
             <tr>
               <td class="col-md-1 control_spans_row  "></td>
-              <td class="col-md-1 control_spans_row  "><input type="text" class="form-control" id="commit_comments" placeholder="Comments... "></td>
+              <td class="col-md-1 control_spans_row  "><input type="text" class="form-control" id="new_commit_comments" placeholder="Comments... "></td>
+              <td class="col-md-1 control_spans_row  "><input type="text" class="form-control" id="new_branch_name" placeholder="Branch name... "></td>
+            </tr>
+            <tr>
               <td class="col-md-1 control_spans_row  "></td>
+              <td class="col-md-1 control_spans_row  "></td>
+              <td class="col-md-1 control_spans_row " > <div class="warning_paragraph_hidden" id="warning_div">Enter a new branch name!</div></td>
             </tr>
           </table>
       </div>

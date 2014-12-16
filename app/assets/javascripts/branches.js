@@ -5,17 +5,48 @@ $(function(){
   currentCommitId = $("meta[property=currentCommitId]").attr("content");
   currentBranchId = $("meta[property=currentBranchId]").attr("content");
 
-  $('.add_branch_button').on('click', function(){
-    $.ajax({
-      type: 'POST',
-      url: '/projects/'+ projectId + '/branches',
-      data: { "currentBranchId" : currentBranchId,
-             "notes" : JSON.stringify(Notes.notesInPlayer())  }
-    }).done(function(result){
-      $("#project_management_div").html(result);
-      updateCommitsLabel();
-    }).fail(function(error){
-      console.log(error);
-    }); 
+  getCurrentBranchName();
+
+  $('.add_branch_button').on('click', function() {
+    if($('#new_branch_name').val()) {
+      $.ajax({
+        type: 'POST',
+        url: '/projects/'+ projectId + '/branches',
+        data: { "branch" : { "current_branch_id" : currentBranchId,
+                              "branch_name" : $('#new_branch_name').val(),
+                              "from_commit_id" : currentCommitId,
+                              "notes" : JSON.stringify(Notes.notesInPlayer())  }
+              }
+      }).done(function(result){
+        console.log(result)
+        currentBranchId = result.branch.id
+        $('#new_branch_name').val('');
+        updateBranchDisplay(result.branch.branch_name);
+      }).fail(function(error){
+        console.log(error);
+      });
+    }
+    else{
+      $('#new_branch_name').addClass('warning');
+      $('#warning_div').addClass('warning_paragraph_visible').removeClass('warning_paragraph_hidden')
+    };
   });
-})
+
+  $('#new_branch_name').on('click', function(){
+    $('#new_branch_name').removeClass('warning');
+  });
+});
+
+function getCurrentBranchName() {
+  $.ajax({
+    type: 'GET',
+    url: '/projects/'+ projectId + '/branches/' + currentBranchId
+  }).done(function(result){
+      updateBranchDisplay(result.branch.branch_name);
+  }).fail(function(error){
+      console.log(error);
+  });
+}
+function updateBranchDisplay(branch_name) {
+  $('.branches_span').text("Branch:  " + branch_name);
+}

@@ -6,12 +6,12 @@ RSpec.describe BranchesController, :type => :controller do
   let(:project)     { projects(:with_title)  }
   let(:branch)      { branches(:branch_master) }
   let(:commit_one)  { commits(:commit_one) }
-
+  let(:branch_hash)      { { branch: { branch_name: "Sausages", current_branch_id: branch.id, from_commit_id: commit_one.id, notes:[]}} }
 
   describe "POST create" do
     it "creates a new branch" do
       expect { 
-        xhr :post, :create, project_id: project.id, branch_name: "Sausages", from_commit_id: commit_one.id
+        xhr :post, :create, project_id: project.id, branch: branch_hash
         }.to change(Branch, :count).by 1  
     end
   end

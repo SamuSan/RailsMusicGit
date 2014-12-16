@@ -4,23 +4,13 @@ class BranchesController < ApplicationController
   end
 
   def show
-    branch = Branch.where(branch_name:params[:id]).first!
-
+    branch = Branch.find(params[:id])
     render json: branch
   end
 
   def create
-    current_branch = Branch.find(params[:currentBranchId])
-    notes = JSON.parse(params[:notes]).compact
-    if current_branch.needs_new_commit?(notes)
-      from_commit  = CreateCommit.new().call
-      CreateBranch.new(branch_name:params[:branch_name], from_commit: from_commit).call
-    else
-
-    end
-    from_commit  = Commit.find(params[:from_commit_id])
-    CreateBranch.new(branch_name:params[:branch_name], from_commit: from_commit).call
-    render partial: 'projects/project_management'
+    branch = CreateBranch.new(branch_params).call
+    render json: branch 
   end
 
   def new
@@ -30,5 +20,11 @@ class BranchesController < ApplicationController
   end
 
   def destroy
+  end
+
+  private
+
+  def branch_params
+    params.require(:branch).permit(:branch_name, :current_branch_id, :from_commit_id, :notes)
   end
 end

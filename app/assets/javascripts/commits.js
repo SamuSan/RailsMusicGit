@@ -17,7 +17,7 @@ $(function(){
     	data: { "notes" : JSON.stringify(Notes.notesInPlayer()),
               "comments" : $('#commit_comments').val() }
     }).done(function(result){
-      $("#project_management_div").html(result);
+      $('#new_commit_comments').val('');
       updateCommitsLabel();
     }).fail(function(error){
     	console.log(error);
@@ -51,5 +51,5 @@ function getNotesForCommit(id){
 }
 
 function updateCommitsLabel(){
-  // $('.controls_commits_span').text("Current Commit: " + (parseInt(currentCommitNumber)));
+  $('.controls_commits_span').text((parseInt(2)));
 }

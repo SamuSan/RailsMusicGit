@@ -58,6 +58,20 @@
     font-weight: 500;
   }
 }
+#new_commit_comments, #new_branch_name{
+  width: 70%;
+}
+.warning{
+  border-color: #e23853;
+}
+.warning_paragraph_visible{
+  color: #e23853;
+  margin: 10px 0px 0px 5px;
+  display: block;
+}
+.warning_paragraph_hidden{
+  display: none;
+}
 .branches_span{
   font-size: 1.6em;
 }
