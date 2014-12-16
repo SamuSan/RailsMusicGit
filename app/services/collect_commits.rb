@@ -6,7 +6,7 @@ class CollectCommits
 
   def call
     collect_commits(@commit)
-    commits_list
+    @commits_list
   end
 
   private

@@ -1,5 +1,6 @@
 var projectId;
 var currentCommitId;
+var currentCommitIndex;
 var currentBranchId;
 
 $(function(){
@@ -8,7 +9,7 @@ $(function(){
   currentBranchId = $("meta[property=currentBranchId]").attr("content");
 
 
-  getNotesForCommit(currentCommitId);
+  getNotesForCommit(currentCommitId, {});
 
   $('.commit_button').on('click', function(e){
     $.ajax({
@@ -25,24 +26,28 @@ $(function(){
   });
 
   $('.forward_button').on('click', function(){
-    if (currentCommitNumber != lastCommitNumber) {
-      currentCommitNumber++;
-      getNotesForCommit(currentCommitNumber);
-    };
+
   });
 
   $('.back_button').on('click', function(){
-    
+    if(){
+    index = currentCommitIndex - 1;
+      getNotesForCommit(currentCommitId, {"index" : index})   
+    }
+   
   });    
 });
 
-function getNotesForCommit(id){
+function getNotesForCommit(id, data){
   player_notes = [];
   $.ajax({
     type: 'GET',
-    url: '/projects/'+ projectId + '/branches/' + currentBranchId +   '/commits/' + id 
+    url: '/projects/'+ projectId + '/branches/' + currentBranchId +   '/commits/' + id,
+    data: data 
   }).done(function(result){
       Notes.addNotesForCurrentCommit(result["commits"][1][1]["notes"]);
+      currentCommitId = result["commits"][1][1]["id"];
+      currentCommitIndex = result["commits"][0][1];
       updateCommitsLabel(result["commits"][0][1]);
       Player.renderGrid();
   }).fail(function(error){

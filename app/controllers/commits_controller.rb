@@ -5,11 +5,14 @@ class CommitsController < ApplicationController
 	end
 
 	def show
-		commit = Commit.where(project_id: params[:project_id], id: params[:id]).first!
-		commit_return = {
-			"commit_number" => FindCommitNumber.new(branch_id: params[:branch_id], commit: commit).call,
-			"commit" => commit
-		}
+		if params[:index].present?
+			commit = FindCommitByIndex.new(params[:index], params[:branch_id]).call
+			commit_index = params[:index]
+		else
+			commit = Commit.where(project_id: params[:project_id], id: params[:id]).first!
+			commit_index = FindCommitNumber.new(branch_id: params[:branch_id], commit: commit).call
+		end
+		commit_return =  {"commit_index" => commit_index, "commit" => commit}
 		render json: commit_return
 	end
 
