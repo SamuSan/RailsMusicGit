@@ -4,6 +4,11 @@
   <span class="control_span">
     <%= image_tag "forward_button.png", size: '40x40', class: "branch_forward_button" %>
   </span> -->
+  <%= dropdown 'Branches' do %>
+    <% @project_branchs.each do |b| %>
+      <%= link_to b.branch_name, project_branch_path(@project, b) %>  
+    <% end %>
+  <% end %>
   <span class="control_span">
     <%= image_tag "add_branch_button.png", size: '40x40', class: "add_branch_button" %>
   </span>

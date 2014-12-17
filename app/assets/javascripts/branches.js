@@ -50,7 +50,7 @@ function getCurrentBranchName() {
   });
 }
 function updateBranchDisplay(branch_name) {
-  // $('.branches_span').text("Branch:  " + branch_name);
+  $('.branches_span').text("Branch:  " + branch_name);
 }
 function setWarnings() {
   $('#new_branch_name').addClass('warning');

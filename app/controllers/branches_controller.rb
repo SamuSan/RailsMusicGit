@@ -4,6 +4,16 @@ class BranchesController < ApplicationController
   end
 
   def show
+    respond_to do |format|
+      format.html do
+        # do the html stuff here
+      end
+
+      format.json do
+        # do the json stuff here
+      end
+    end
+    
     if params[:branch_name].present?
       
     else
