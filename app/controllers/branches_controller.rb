@@ -6,20 +6,22 @@ class BranchesController < ApplicationController
   def show
     respond_to do |format|
       format.html do
-        # do the html stuff here
+        branch = Branch.find(params[:id])
+        render json: branch
       end
 
       format.json do
-        # do the json stuff here
+        # branch = Branch.find(params[:id])
+        # render json: branch
       end
     end
-    
-    if params[:branch_name].present?
+
+    # if params[:branch_name].present?
       
-    else
-      branch = Branch.find(params[:id])
-    end
-    render json: branch
+    # else
+    #   branch = Branch.find(params[:id])
+    # end
+    # render json: branch
   end
 
   def create

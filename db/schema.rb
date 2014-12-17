@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20141210020427) do
 
   create_table "commits", force: true do |t|
     t.integer  "project_id",       null: false
+    t.integer  "commit_number",    null: false
     t.text     "comments"
     t.integer  "parent_commit_id"
     t.datetime "created_at"

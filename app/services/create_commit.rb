@@ -8,7 +8,7 @@ class CreateCommit
 
 	def call
 		Commit.transaction do
-			commit = Commit.new(project_id: @parent_commit.project_id, parent_commit: @parent_commit, comments: @comments)
+			commit = Commit.new(project_id: @parent_commit.project_id, parent_commit: @parent_commit, comments: @comments, commit_number: @parent_commit.commit_number + 1)
 			@notes.each { |note| commit.notes.build(position:note["position"], duration: note["duration"], frequency: note["frequency"]) }	
 			commit.save!
 			@branch.head_commit_id = commit.id

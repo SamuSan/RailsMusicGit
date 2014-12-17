@@ -5,4 +5,5 @@ class Commit < ActiveRecord::Base
   belongs_to :parent_commit, :class_name => 'Commit'
 
   validates :project_id, null: false
+  validates :commit_number, null: false
 end
