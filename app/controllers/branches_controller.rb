@@ -4,13 +4,18 @@ class BranchesController < ApplicationController
   end
 
   def show
-    branch = Branch.find(params[:id])
+    if params[:branch_name].present?
+      
+    else
+      branch = Branch.find(params[:id])
+    end
     render json: branch
   end
 
   def create
     branch = CreateBranch.new(branch_params).call
-    render json: branch 
+    commit_index = FindCommitNumber.new(commit: Commit.find(branch.head_commit_id), branch_id: branch.id).call
+    render json: { "branch" => branch, "commit_index" => commit_index }  
   end
 
   def new

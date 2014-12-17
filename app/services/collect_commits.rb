@@ -13,7 +13,7 @@ class CollectCommits
 
   def collect_commits(commit)
     @commits_list << commit
-    current_commit = Commit.find(commit.parent_commit_id)
+    commit.parent_commit_id.nil? ? current_commit = commit  : current_commit = Commit.find(commit.parent_commit_id)
     
     unless current_commit.parent_commit_id.nil?
       collect_commits(current_commit) 

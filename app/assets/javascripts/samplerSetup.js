@@ -10,7 +10,7 @@ window.SamplerSetup = new function(){
     context.createScriptProcessor = context.createJavaScriptNode;
 
   // shim layer with setTimeout fallback
-  window.requestAnimFrame = (function(){
+  window.requestAnimFrame = (function() {
   return  window.requestAnimationFrame       || 
     window.webkitRequestAnimationFrame || 
     window.mozRequestAnimationFrame    || 

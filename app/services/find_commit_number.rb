@@ -9,6 +9,7 @@ class FindCommitNumber
     branch = Branch.find(@branch_id)
     @commits_list = CollectCommits.new(Commit.find(branch.head_commit_id)).call 
     @commits_list.reverse!
+    # require 'pry-byebug'; binding.pry
     @commits_list.index(@commit)
   end
 end

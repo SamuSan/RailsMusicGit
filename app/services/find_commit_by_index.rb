@@ -6,6 +6,7 @@ class FindCommitByIndex
 
   def call
     commits = CollectCommits.new(Commit.find(@branch.head_commit_id)).call
+    commits.reverse!
     commit = commits[@index]
   end
 end

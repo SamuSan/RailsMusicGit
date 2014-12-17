@@ -18,21 +18,23 @@ $(function(){
                               "notes" : JSON.stringify(Notes.notesInPlayer())  }
               }
       }).done(function(result){
-        console.log(result)
-        currentBranchId = result.branch.id
-        $('#new_branch_name').val('');
-        updateBranchDisplay(result.branch.branch_name);
+        console.log(result);
+        currentBranchId = parseInt(result["branches"][0][1]["id"]);
+        resetWarnings();
+        updateBranchDisplay(result["branches"][0][1]["branch_name"]);
+        currentCommitId = parseInt(result["branches"][0][1]["head_commit_id"])
+        currentCommitIndex = parseInt(result["branches"][1][1]);
+        updateCommitsLabel(currentCommitIndex);
       }).fail(function(error){
         console.log(error);
       });
     }
     else{
-      $('#new_branch_name').addClass('warning');
-      $('#warning_div').addClass('warning_paragraph_visible').removeClass('warning_paragraph_hidden')
+        setWarnings();
     };
   });
 
-  $('#new_branch_name').on('click', function(){
+    $('#new_branch_name').on('click', function(){
     $('#new_branch_name').removeClass('warning');
   });
 });
@@ -48,5 +50,15 @@ function getCurrentBranchName() {
   });
 }
 function updateBranchDisplay(branch_name) {
-  $('.branches_span').text("Branch:  " + branch_name);
+  // $('.branches_span').text("Branch:  " + branch_name);
+}
+function setWarnings() {
+  $('#new_branch_name').addClass('warning');
+  $('#warning_div').addClass('warning_paragraph_visible').removeClass('warning_paragraph_hidden')
+}
+function resetWarnings() {
+  $('#new_branch_name').val('');
+  $('#new_branch_name').removeClass('warning');
+  $('#warning_div').addClass('warning_paragraph_hidden').removeClass('warning_paragraph_visible');
+  $('#create_branch_prompt_div').removeClass('warning_paragraph_visible').addClass('warning_paragraph_hidden');
 }
