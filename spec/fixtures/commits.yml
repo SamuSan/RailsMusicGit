@@ -1,15 +1,19 @@
 commit_one:
  project: with_title
  parent_commit: nil
+ number: 1
 
 commit_two:
  project: with_title
  parent_commit: commit_one
+ number: 2
 
 commit_three:
  project: with_title
  parent_commit: commit_two
+ number: 3
 
 commit_four:
  project: with_title
  parent_commit: commit_two
+ number: 4

@@ -4,11 +4,11 @@ class CreateCommits < ActiveRecord::Migration
       t.integer :project_id, null: false
       t.index   :project_id
 
-      t.integer :commit_number, null: false
+      t.integer :number, null: false
       t.text :comments
 
       t.integer :parent_commit_id
-      t.index :parent_commit_id
+      t.index :parent_commit_id   
       t.timestamps
     end
   end

@@ -8,8 +8,8 @@ class CreateProject
 			project = Project.new(@project_params)
 
 	    if project.save
-				commit = Commit.create!(parent_commit_id: nil, project_id: project.id, commit_number: 1)
-		    Branch.create!(branch_name: Branch::MASTER_BRANCH_NAME, head_commit_id: commit.id)
+				commit = project.commits.create!(number: 1)
+		    Branch.create!(name: Branch::MASTER_BRANCH_NAME, head_commit: commit)
 	    	project
 	    end
 	  end

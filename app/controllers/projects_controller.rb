@@ -7,8 +7,8 @@ class ProjectsController < ApplicationController
 		@player = Player.new
 		begin
 			@project = Project.find(params[:id])
-			@project_branchs = Branch.all.select { |branch| @project.commits.pluck(:id).include?(branch.head_commit_id) }
-			@current_branch = @project_branchs.select{ |branch| branch.branch_name == Branch::MASTER_BRANCH_NAME }.first	
+			@project_branchs = Branch.all.select { |branch| @project.commits.pluck(:id).include?(branch.head_commit.id) }
+			@current_branch = @project_branchs.select{ |branch| branch.name == Branch::MASTER_BRANCH_NAME }.first	
 		rescue ActiveRecord::RecordNotFound
 			flash[:alert] = "Project with id #{params[:id]} not found!"
 			redirect_to projects_path

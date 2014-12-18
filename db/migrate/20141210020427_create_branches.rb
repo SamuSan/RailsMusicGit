@@ -4,7 +4,7 @@ class CreateBranches < ActiveRecord::Migration
       t.integer :head_commit_id, null: false
       t.index   :head_commit_id
 
-      t.string  :branch_name, null: false
+      t.string  :name, null: false
       t.timestamps
     end
   end

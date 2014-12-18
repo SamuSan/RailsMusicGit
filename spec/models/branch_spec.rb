@@ -12,11 +12,11 @@ RSpec.describe Branch, :type => :model do
       end
 
       it "fails when no from commit is provided is provided" do
-        expect{ Branch.create!( branch_name:"Bung") }.to raise_error
+        expect{ Branch.create!( name:"Bung") }.to raise_error
       end
 
       it "succeeds when both arguments are passed" do
-        expect{ Branch.create!(head_commit: commit,  branch_name:"Bung") }.not_to raise_error
+        expect{ Branch.create!(head_commit: commit,  name:"Bung") }.not_to raise_error
       end
     end
   end

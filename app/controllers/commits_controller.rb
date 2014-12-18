@@ -5,15 +5,8 @@ class CommitsController < ApplicationController
 	end
 
 	def show
-		if params[:index].present?
-			commit = FindCommitByIndex.new(params[:index], params[:branch_id]).call
-			commit_index = params[:index]
-		else
-			commit = Commit.where(project_id: params[:project_id], id: params[:id]).first!
-			commit_index = FindCommitNumber.new(branch_id: params[:branch_id], commit: commit).call
-		end
-		commit_return =  {"commit_index" => commit_index, "commit" => commit}
-		render json: commit_return
+		commit = Commit.where(project: Project.find(params[:project_id]), id: params[:id]).first!
+		render json: commit
 	end
 
 	def new
@@ -21,13 +14,10 @@ class CommitsController < ApplicationController
 
 	def create
 		begin
-			commit = CreateCommit.new(branch_id: params[:branch_id], notes: params[:notes], comments: params[:comments]).call
 			@player = Player.new
-			commit_return = {
-				"commit_number" => FindCommitNumber.new(branch_id: params[:branch_id], commit: commit).call,
-				"commit" => commit
-			}
-			render json: commit_return
+			notes = JSON.parse(params[:notes]).compact
+			commit = CreateCommit.new(project: Project.find(params[:project_id]), branch: Branch.find(params[:branch_id]), notes: notes, comments: params[:comments]).call
+			render json: commit
 		rescue ActiveRecord::RecordNotFound
 			flash[:alert] = "Project with ID #{params[:project_id]} not found"
 			redirect_to projects_path

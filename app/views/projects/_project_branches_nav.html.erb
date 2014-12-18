@@ -6,7 +6,7 @@
   </span> -->
   <%= dropdown 'Branches' do %>
     <% @project_branchs.each do |b| %>
-      <%= link_to b.branch_name, project_branch_path(@project, b) %>  
+      <%= link_to b.name, project_branch_path(@project, b) %>  
     <% end %>
   <% end %>
   <span class="control_span">

@@ -1,6 +1,6 @@
 branch_master:
   head_commit: commit_three
-  branch_name: "master"
+  name: "master"
 branch_bingo:
   head_commit: commit_two
-  branch_name: "bingo"
+  name: "bingo"

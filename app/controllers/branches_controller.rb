@@ -4,30 +4,13 @@ class BranchesController < ApplicationController
   end
 
   def show
-    respond_to do |format|
-      format.html do
-        branch = Branch.find(params[:id])
-        render json: branch
-      end
-
-      format.json do
-        # branch = Branch.find(params[:id])
-        # render json: branch
-      end
-    end
-
-    # if params[:branch_name].present?
-      
-    # else
-    #   branch = Branch.find(params[:id])
-    # end
-    # render json: branch
+    branch = Branch.find(params[:id])
+    render json: branch
   end
 
   def create
-    branch = CreateBranch.new(branch_params).call
-    commit_index = FindCommitNumber.new(commit: Commit.find(branch.head_commit_id), branch_id: branch.id).call
-    render json: { "branch" => branch, "commit_index" => commit_index }  
+    branch = CreateBranch.new(branch_params: branch_params).call
+    render json: branch
   end
 
   def new
@@ -42,6 +25,6 @@ class BranchesController < ApplicationController
   private
 
   def branch_params
-    params.require(:branch).permit(:branch_name, :current_branch_id, :from_commit_id, :notes)
+    params.require(:branch).permit(:name, :current_branch_id, :from_commit_id)
   end
 end

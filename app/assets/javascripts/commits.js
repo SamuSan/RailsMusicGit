@@ -1,7 +1,7 @@
 var projectId;
 var branchHeadId;
 var currentCommitId;
-var currentCommitIndex;
+var currentCommitNumber;
 var currentBranchId;
 
 $(function(){
@@ -22,10 +22,10 @@ $(function(){
                 "current_commit_id" : currentCommitId }
       }).done(function(result){
         $('#new_commit_comments').val('');
-        currentCommitId = result["commits"][1][1]["id"];
+        currentCommitId = result.commit.id;
         branchHeadId = currentCommitId;
-        currentCommitIndex = parseInt(result["commits"][0][1]);
-        updateCommitsLabel(currentCommitIndex);
+        currentCommitNumber = parseInt(result.commit.number);
+        updateCommitsLabel(currentCommitNumber);
       }).fail(function(error){
       	console.log(error);
   		});	
@@ -36,15 +36,15 @@ $(function(){
   });
 
   $('.forward_button').on('click', function(){
-    if(currentCommitIndex + 1 < 100000){//Fix this shit it is not ok
-      index = currentCommitIndex + 1;
+    if(currentCommitNumber + 1 < 100000){//Fix this shit it is not ok
+      index = currentCommitNumber + 1;
       getNotesForCommit(currentCommitId, {"index" : index})   
     }
   });
 
   $('.back_button').on('click', function(){
-    if(currentCommitIndex - 1 > 0){
-      index = currentCommitIndex - 1;
+    if(currentCommitNumber - 1 > 0){
+      index = currentCommitNumber - 1;
       getNotesForCommit(currentCommitId, {"index" : index})   
     }
   });    
@@ -57,10 +57,10 @@ function getNotesForCommit(id, data){
     url: '/projects/'+ projectId + '/branches/' + currentBranchId +   '/commits/' + id,
     data: data 
   }).done(function(result){
-      Notes.addNotesForCurrentCommit(result["commits"][1][1]["notes"]);
-      currentCommitId = result["commits"][1][1]["id"];
-      currentCommitIndex = parseInt(result["commits"][0][1]);
-      updateCommitsLabel(currentCommitIndex + 1);
+      Notes.addNotesForCurrentCommit(result.commit.notes);
+      currentCommitId = result.commit.id;
+      currentCommitNumber = parseInt(result.commit.number);
+      updateCommitsLabel(currentCommitNumber);
       Player.renderGrid();
   }).fail(function(error){
       console.log("An error occured" + error);

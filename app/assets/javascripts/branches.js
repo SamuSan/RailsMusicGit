@@ -13,7 +13,7 @@ $(function(){
         type: 'POST',
         url: '/projects/'+ projectId + '/branches',
         data: { "branch" : { "current_branch_id" : currentBranchId,
-                              "branch_name" : $('#new_branch_name').val(),
+                              "name" : $('#new_branch_name').val(),
                               "from_commit_id" : currentCommitId,
                               "notes" : JSON.stringify(Notes.notesInPlayer())  }
               }
@@ -21,7 +21,7 @@ $(function(){
         console.log(result);
         currentBranchId = parseInt(result["branches"][0][1]["id"]);
         resetWarnings();
-        updateBranchDisplay(result["branches"][0][1]["branch_name"]);
+        updateBranchDisplay(result["branches"][0][1]["name"]);
         currentCommitId = parseInt(result["branches"][0][1]["head_commit_id"])
         currentCommitIndex = parseInt(result["branches"][1][1]);
         updateCommitsLabel(currentCommitIndex);
@@ -44,13 +44,14 @@ function getCurrentBranchName() {
     type: 'GET',
     url: '/projects/'+ projectId + '/branches/' + currentBranchId
   }).done(function(result){
-      updateBranchDisplay(result.branch.branch_name);
+      branch = $.parseJSON(result).branch;
+      updateBranchDisplay(branch.name);
   }).fail(function(error){
       console.log(error);
   });
 }
-function updateBranchDisplay(branch_name) {
-  $('.branches_span').text("Branch:  " + branch_name);
+function updateBranchDisplay(name) {
+  $('.branches_span').text("Branch:  " + name);
 }
 function setWarnings() {
   $('#new_branch_name').addClass('warning');

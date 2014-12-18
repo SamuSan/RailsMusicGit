@@ -1,3 +1,4 @@
 class BranchSerializer < ActiveModel::Serializer
-  attributes :id, :branch_name, :head_commit_id
+  attributes :id, :name
+  has_one :head_commit
 end
