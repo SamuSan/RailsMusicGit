@@ -12,9 +12,9 @@ class CreateCommit
 			@project.lock!(lock = true)
 			@branch.reload
 			@parent_commit 	= Commit.find(@branch.head_commit_id)
-
+			# require 'pry-byebug'; binding.pry
 			commit = @project.commits.create(project: @project, parent_commit: @parent_commit, comments: @comments, number: FindCommitNumber.new(project: @project).call)
-			# @notes.each { |note| commit.notes.build(position:note["position"], duration: note["duration"], frequency: note["frequency"]) }	
+			@notes.each { |note| commit.notes.build(position:note["position"], duration: note["duration"], frequency: note["frequency"]) }	
 			commit.save!
 			
 			@branch.head_commit = commit

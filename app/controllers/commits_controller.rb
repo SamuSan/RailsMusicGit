@@ -16,6 +16,7 @@ class CommitsController < ApplicationController
 		begin
 			@player = Player.new
 			notes = JSON.parse(params[:notes]).compact
+			require 'pry-byebug'; binding.pry
 			commit = CreateCommit.new(project: Project.find(params[:project_id]), branch: Branch.find(params[:branch_id]), notes: notes, comments: params[:comments]).call
 			render json: commit
 		rescue ActiveRecord::RecordNotFound
