@@ -1,3 +1,6 @@
+var SPACE_BAR = 32;
+var ENTER     = 13;
+
 window.Player = new function(){
   $(function() {
     $('.note_button').on('click', function(e) {
@@ -19,12 +22,12 @@ window.Player = new function(){
     });
 
     $(document).keypress(function(e) {
-      if(e.which == 32 && !DrumMachine.isPlaying()) {
+      if(e.which == SPACE_BAR && !DrumMachine.isPlaying()) {
         $('.play_button').click();
-      }else if (e.which == 32 && DrumMachine.isPlaying()) { 
+      }else if (e.which == SPACE_BAR && DrumMachine.isPlaying()) { 
         $('.stop_button').click();
       }
-      else if (e.which == 13){
+      else if (e.which == ENTER){
         $('.add_branch_button').click();
       }
     }); 

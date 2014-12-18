@@ -1,30 +1,24 @@
-// Place all the behaviors and hooks related to the matching controller here.
-// All this logic will automatically be available in application.js.
+var currentBranch;
 $(function(){
   projectId = $("meta[property=projectId]").attr("content");
   currentCommitId = $("meta[property=currentCommitId]").attr("content");
   currentBranchId = $("meta[property=currentBranchId]").attr("content");
 
-  getCurrentBranchName();
+  getCurrentBranchName(currentBranchId);
 
   $('.add_branch_button').on('click', function() {
     if($('#new_branch_name').val()) {
       $.ajax({
         type: 'POST',
         url: '/projects/'+ projectId + '/branches',
-        data: { "branch" : { "current_branch_id" : currentBranchId,
-                              "name" : $('#new_branch_name').val(),
-                              "from_commit_id" : currentCommitId,
-                              "notes" : JSON.stringify(Notes.notesInPlayer())  }
+        data: { "branch" : { "current_branch_id" : currentBranch.id,
+                              "name" : $('#new_branch_name').val() }
               }
       }).done(function(result){
-        console.log(result);
-        currentBranchId = parseInt(result["branches"][0][1]["id"]);
+        currentBranch = new Branch(result.branch);
         resetWarnings();
-        updateBranchDisplay(result["branches"][0][1]["name"]);
-        currentCommitId = parseInt(result["branches"][0][1]["head_commit_id"])
-        currentCommitIndex = parseInt(result["branches"][1][1]);
-        updateCommitsLabel(currentCommitIndex);
+        updateBranchDisplay();
+        updateCommitsLabel();
       }).fail(function(error){
         console.log(error);
       });
@@ -39,19 +33,19 @@ $(function(){
   });
 });
 
-function getCurrentBranchName() {
+function getCurrentBranchName(id) {
   $.ajax({
     type: 'GET',
-    url: '/projects/'+ projectId + '/branches/' + currentBranchId
+    url: '/projects/'+ projectId + '/branches/' + id
   }).done(function(result){
-      branch = $.parseJSON(result).branch;
-      updateBranchDisplay(branch.name);
+      currentBranch = new Branch(result.branch);
+      updateBranchDisplay();
   }).fail(function(error){
       console.log(error);
   });
 }
-function updateBranchDisplay(name) {
-  $('.branches_span').text("Branch:  " + name);
+function updateBranchDisplay() {
+  $('.branches_span').text("Branch:  " + currentBranch.name);
 }
 function setWarnings() {
   $('#new_branch_name').addClass('warning');
