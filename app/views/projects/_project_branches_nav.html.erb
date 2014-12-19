@@ -1,14 +1,10 @@
-<!--   <span class="control_span">
-    <%= image_tag "back_button.png", size: '40x40', class: "branch_back_button" %>
-  </span>
-  <span class="control_span">
-    <%= image_tag "forward_button.png", size: '40x40', class: "branch_forward_button" %>
-  </span> -->
+<div id="branchSelector">
   <%= dropdown 'Branches' do %>
-    <% @project_branchs.each do |b| %>
-      <%= link_to b.name, project_branch_path(@project, b) %>  
+    <% @project_branchs.each do |branch| %>
+    <%= content_tag(:li, "#{branch.name}", :data => { "id" => branch.id }, class: "branch_list_element") %>
     <% end %>
   <% end %>
-  <span class="control_span">
-    <%= image_tag "add_branch_button.png", size: '40x40', class: "add_branch_button" %>
-  </span>
+</div>
+<span class="control_span">
+  <%= image_tag "add_branch_button.png", size: '40x40', class: "add_branch_button" %>
+</span>

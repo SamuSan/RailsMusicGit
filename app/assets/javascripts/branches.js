@@ -4,7 +4,7 @@ $(function(){
   currentCommitId = $("meta[property=currentCommitId]").attr("content");
   currentBranchId = $("meta[property=currentBranchId]").attr("content");
 
-  getCurrentBranchName(currentBranchId);
+  loadBranch(currentBranchId);
 
   $('.add_branch_button').on('click', function() {
     if($('#new_branch_name').val()) {
@@ -28,10 +28,27 @@ $(function(){
     };
   });
 
-    $('#new_branch_name').on('click', function(){
+  $('#new_branch_name').on('click', function(){
     $('#new_branch_name').removeClass('warning');
   });
+  $('#branchSelector').on('click', 'li', function(e){
+    var branchId = parseInt(e.currentTarget.dataset.id);
+    loadBranch(branchId);
+  });
 });
+
+function loadBranch(id) {
+  console.log("ASFDJKHASDJKHGASDKJHG" + +id)
+  $.ajax({
+    type: 'GET',
+    url: '/projects/'+ projectId + '/branches/' + id
+  }).done(function(result){
+      currentBranch = new Branch(result.branch);
+      updateBranchDisplay();
+  }).fail(function(error){
+      console.log(error);
+  });
+}
 
 function getCurrentBranchName(id) {
   $.ajax({

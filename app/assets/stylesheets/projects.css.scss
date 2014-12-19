@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .main_container{
-  width: 53%;
+  max-width: 1000px;
   margin: 0 auto;
   .warning{
     color:#e23853;
@@ -28,8 +28,7 @@
 }
 .home_button{
   border-radius: 3px; 
-  margin: 0px 0px 0px 0px;
-  background-color: #aaaaaa;
+  margin: 0px 0px 0px 5px;
   font-family: 'Varela', sans-serif; 
 }
 .player_div{
@@ -71,6 +70,9 @@
 }
 .warning_paragraph_hidden{
   display: none;
+}
+.branch_list_element{
+  margin: 0px 0px 10px 10px;
 }
 .branches_span{
   font-size: 1.6em;

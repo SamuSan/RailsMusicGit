@@ -12,14 +12,18 @@ class CreateCommit
 			@project.lock!(lock = true)
 			@branch.reload
 			@parent_commit 	= Commit.find(@branch.head_commit_id)
-			# require 'pry-byebug'; binding.pry
-			commit = @project.commits.create(project: @project, parent_commit: @parent_commit, comments: @comments, number: FindCommitNumber.new(project: @project).call)
-			@notes.each { |note| commit.notes.build(position:note["position"], duration: note["duration"], frequency: note["frequency"]) }	
-			commit.save!
-			
-			@branch.head_commit = commit
-			@branch.save!
-			commit
+
+			if CompareNoteCollections.new(@parent_commit.notes, @notes).call
+				commit = @project.commits.create(project: @project, parent_commit: @parent_commit, comments: @comments, number: FindCommitNumber.new(project: @project).call)
+				@notes.each { |note| commit.notes.build(position:note["position"], duration: note["duration"], frequency: note["frequency"]) }	
+				commit.save!
+				
+				@branch.head_commit = commit
+				@branch.save!
+				commit
+			else
+				@parent_commit
+			end
 		end
 	end
 end
