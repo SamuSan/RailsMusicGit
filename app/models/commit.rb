@@ -6,4 +6,9 @@ class Commit < ActiveRecord::Base
 
   validates :project, presence: true, uniqueness: { scope: :id }
   validates :number, presence: true 
+
+  def next_commit_towards_commit(head_commit)
+     all_commits = CollectCommits.new(head_commit).call
+     FindNextCommitId.new(all_commits: all_commits, commit_to_search_from: self).call
+  end
 end

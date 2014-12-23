@@ -1,12 +1,13 @@
 class CommitsController < ApplicationController
-	require 'commits_helper'
+	before_action :load_branch
+	before_action :load_project
 	
 	def index
 	end
 
 	def show
-		commit = Commit.where(project: Project.find(params[:project_id]), id: params[:id]).first!
-		render json: commit
+		commit = @project.commits.find(params[:id])
+		render json: commit, head_commit: @branch.head_commit
 	end
 
 	def new
@@ -17,11 +18,21 @@ class CommitsController < ApplicationController
 			@player = Player.new
 			notes = JSON.parse(params[:notes]).compact
 
-			commit = CreateCommit.new(project: Project.find(params[:project_id]), branch: Branch.find(params[:branch_id]), notes: notes, comments: params[:comments]).call
+			commit = CreateCommit.new(project: @project, branch: @branch, notes: notes, comments: params[:comments]).call
 			render json: commit
 		rescue ActiveRecord::RecordNotFound
 			flash[:alert] = "Project with ID #{params[:project_id]} not found"
 			redirect_to projects_path
 		end
+	end
+
+	private
+
+	def load_branch
+		@branch = Branch.find(params[:branch_id])
+	end
+
+	def load_project
+		@project = Project.find(params[:project_id])
 	end
 end

@@ -1,7 +1,7 @@
 <div id="branchSelector">
   <%= dropdown 'Branches' do %>
     <% @project_branchs.each do |branch| %>
-    <%= content_tag(:li, "#{branch.name}", :data => { "id" => branch.id }, class: "branch_list_element") %>
+    <%= content_tag(:li, "#{branch.name}", :data => { "id" => branch.id }, class: "") %>
     <% end %>
   <% end %>
 </div>
