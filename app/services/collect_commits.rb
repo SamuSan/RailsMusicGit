@@ -12,7 +12,6 @@ class CollectCommits
   private
 
   def collect_commits(commit)
-    require 'pry-byebug'; binding.pry
     @commits_list << commit
     commit.parent_commit_id.nil? ? current_commit = commit  : current_commit = Commit.find(commit.parent_commit_id)
     
