@@ -39,13 +39,12 @@ $(function(){
   });
 
   $('.forward_button').on('click', function(){
-      getNotesForCommit(previousCommitId)   
+      getNotesForCommit(currentCommit.next_commit_id);   
   });
 
   $('.back_button').on('click', function(){
     if(currentCommit.number - 1 > 0){
-      previousCommitId = currentCommit.id;
-      getNotesForCommit(currentCommit.parent_commit_id)   
+      getNotesForCommit(currentCommit.parent_commit_id);   
     }
   });    
 });
@@ -55,12 +54,13 @@ function getNotesForCommit(id){
     type: 'GET',
     url: '/projects/'+ projectId + '/branches/' + currentBranchId +   '/commits/' + id
   }).done(function(result){
+      console.log(result)
       currentCommit = new Commit(result.commit);
       Notes.addNotesForCurrentCommit(currentCommit.notes);
       updateCommitsLabel();
       Player.renderGrid();
   }).fail(function(error){
-      console.log("An error occured" + error);
+      console.log(error);
   });
 }
 

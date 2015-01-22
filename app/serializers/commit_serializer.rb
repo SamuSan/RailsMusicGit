@@ -3,6 +3,6 @@ class CommitSerializer < ActiveModel::Serializer
   has_many :notes
 
   def next_commit_id
-    object.next_commit_towards_commit(serialization_options[:head_commit])
+    object.next_commit_towards_head_commit(serialization_options[:head_commit])
   end
 end
