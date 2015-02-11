@@ -49,9 +49,6 @@ $(function(){
   });
 });
 
-function makeNewCommit(){
-
-}
 function getNotesForCommit(id){
   $.ajax({
     type: 'GET',

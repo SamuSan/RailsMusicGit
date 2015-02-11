@@ -13,11 +13,8 @@ $(function(){
         url: '/projects/'+ projectId + '/branches',
         data: { "branch" : { "current_commit_id" : currentCommit.id,
                               "name" : $('#new_branch_name').val(),
-                              "commit" : {
-                                "notes" : JSON.stringify(Notes.notesInPlayer()),
-                                "comments" : $('#commit_comments').val(),
-                                "current_commit_id" : currentCommit.id
-                              }
+                              "notes" : JSON.stringify(Notes.notesInPlayer()),
+                              "comments" : $('#commit_comments').val(),
                             }
 
               }
@@ -25,7 +22,7 @@ $(function(){
         currentBranch = new Branch(result.branch);
         resetWarnings();
         updateBranchDisplay();
-        updateCommitsLabel();
+        getNotesForCommit(currentBranch.headCommitId);
       }).fail(function(error){
         console.log(error);
       });

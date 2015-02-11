@@ -24,6 +24,6 @@ class BranchesController < ApplicationController
   private
 
   def branch_params
-    params.require(:branch).permit(:name, :current_branch_id, :from_commit_id)
+    params.require(:branch).permit(:name, :current_commit_id, :notes, :comments)
   end
 end
