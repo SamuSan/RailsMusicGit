@@ -11,8 +11,15 @@ $(function(){
       $.ajax({
         type: 'POST',
         url: '/projects/'+ projectId + '/branches',
-        data: { "branch" : { "current_branch_id" : currentBranch.id,
-                              "name" : $('#new_branch_name').val() }
+        data: { "branch" : { "current_commit_id" : currentCommit.id,
+                              "name" : $('#new_branch_name').val(),
+                              "commit" : {
+                                "notes" : JSON.stringify(Notes.notesInPlayer()),
+                                "comments" : $('#commit_comments').val(),
+                                "current_commit_id" : currentCommit.id
+                              }
+                            }
+
               }
       }).done(function(result){
         currentBranch = new Branch(result.branch);

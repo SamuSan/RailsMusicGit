@@ -1,5 +1,6 @@
-function Branch(params) { 
+function Branch(params) {
+  console.log(params)
   this.id = params.id;
   this.name = params.name;
-  // this.headCommit = new Commit(params.head_commit);
+  this.headCommitId = params.headCommitId;
 }

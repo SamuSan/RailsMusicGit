@@ -1,7 +1,7 @@
 class CommitsController < ApplicationController
 	before_action :load_branch
 	before_action :load_project
-	
+
 	def index
 	end
 
@@ -18,8 +18,8 @@ class CommitsController < ApplicationController
 			@player = Player.new
 			notes = JSON.parse(params[:notes]).compact
 
-			commit = CreateCommit.new(project: @project, branch: @branch, notes: notes, comments: params[:comments]).call
-			render json: commit
+			commit = CreateCommit.new(project: @project, current_commit_id: params[:current_commit_id], branch: @branch, notes: notes, comments: params[:comments]).call
+			render json: commit, head_commit: @branch.head_commit
 		rescue ActiveRecord::RecordNotFound
 			flash[:alert] = "Project with ID #{params[:project_id]} not found"
 			redirect_to projects_path

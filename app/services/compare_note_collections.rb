@@ -5,7 +5,6 @@ class CompareNoteCollections
   end
 
   def call
-    require 'pry-byebug'; binding.pry
     build_array_of_notes(@new_notes)
     @current_notes.size != @new_notes.size || !compare_notes
   end

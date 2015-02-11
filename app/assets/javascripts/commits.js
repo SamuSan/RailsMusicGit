@@ -22,7 +22,7 @@ $(function(){
       	url: '/projects/'+ projectId + '/branches/' + currentBranchId +'/commits' ,
       	data: { "notes" : JSON.stringify(Notes.notesInPlayer()),
                 "comments" : $('#commit_comments').val(),
-                "current_commit_id" : currentCommit.id 
+                "current_commit_id" : currentCommit.id
               }
       }).done(function(result){
         $('#new_commit_comments').val('');
@@ -31,7 +31,7 @@ $(function(){
         updateCommitsLabel();
       }).fail(function(error){
       	console.log(error);
-  		});	
+  		});
     }
     else{
       notifyUserBranchNeeded();
@@ -39,16 +39,19 @@ $(function(){
   });
 
   $('.forward_button').on('click', function(){
-      getNotesForCommit(currentCommit.next_commit_id);   
+      getNotesForCommit(currentCommit.next_commit_id);
   });
 
   $('.back_button').on('click', function(){
     if(currentCommit.number - 1 > 0){
-      getNotesForCommit(currentCommit.parent_commit_id);   
+      getNotesForCommit(currentCommit.parent_commit_id);
     }
-  });    
+  });
 });
 
+function makeNewCommit(){
+
+}
 function getNotesForCommit(id){
   $.ajax({
     type: 'GET',
@@ -65,10 +68,11 @@ function getNotesForCommit(id){
 }
 
 function updateCommitsLabel(){
-  $('.controls_commits_span').text((parseInt(currentCommit.number)));
+  $('.controls_commits_span').text((parseInt(currentCommit.number - 1)));
 }
 
 function canCommit() {
+  console.log("Sausges");
   return currentCommit.id == branchHeadId;
 }
 function notifyUserBranchNeeded() {

@@ -5,7 +5,7 @@ class Commit < ActiveRecord::Base
   belongs_to :parent_commit, :class_name => 'Commit'
 
   validates :project, presence: true, uniqueness: { scope: :id }
-  validates :number, presence: true 
+  validates :number, presence: true
 
   def next_commit_towards_head_commit(head_commit)
      all_commits = CollectCommits.new(head_commit).call
