@@ -14,8 +14,17 @@ RSpec.describe CommitsController, type: :controller do
 
     context "the user trys to access a non existent project" do
       it "raises an error if the project id provided is not found" do
-        xhr :post, :create, project_id: 1000, branch_id: 100, notes: notes
-        expect(response).to redirect_to(projects_path)
+        expect{
+          xhr :post, :create, project_id: 1000, branch_id: 100, notes: notes
+          }.to raise_error
+      end
+    end
+
+    context "the user trys to access a non existent branch" do
+      it "raises an error if the project id provided is not found" do
+        expect{
+          xhr :post, :create, project_id: project.id, branch_id: 100, notes: notes
+          }.to raise_error
       end
     end
 
@@ -24,20 +33,6 @@ RSpec.describe CommitsController, type: :controller do
         expect {
           xhr :post, :create, project_id: project.id, current_commit_id: commit_three.id, branch_id: branch.id, notes: notes, comments: "lskdf"
         }.to change(Commit, :count).by 1
-      end
-
-      it "changes the current branch's head commit pointer to the newest commit" do
-          xhr :post, :create, project_id: project.id, branch_id: branch.id, notes: notes
-
-      end
-    end
-
-    context 'when creating a commit fails ' do
-      it "redirects to the index and displays an error message" do
-        expect  {
-          xhr :post, :create, project_id: 100, branch_id: branch.id , notes: notes
-          expect(response).to redirect_to(projects_path)
-        }.not_to change(Commit, :count)
       end
     end
   end

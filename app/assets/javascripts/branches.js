@@ -20,6 +20,7 @@ $(function(){
               }
       }).done(function(result){
         currentBranch = new Branch(result.branch);
+        currentBranchId = currentBranch.id;
         resetWarnings();
         updateBranchDisplay();
         getNotesForCommit(currentBranch.headCommitId);
@@ -42,12 +43,12 @@ $(function(){
 });
 
 function loadBranch(id) {
-  console.log("ASFDJKHASDJKHGASDKJHG" + +id)
   $.ajax({
     type: 'GET',
     url: '/projects/'+ projectId + '/branches/' + id
   }).done(function(result){
       currentBranch = new Branch(result.branch);
+      branchHeadId = currentBranch.headCommitId;
       updateBranchDisplay();
   }).fail(function(error){
       console.log(error);

@@ -1,10 +1,10 @@
-note_one : 
+note_one :
  frequency : 330.00
- duration : 6 
+ duration : 6
  position : 3
  commit: commit_one
 
-note_two : 
+note_two :
  frequency : 330.00
  duration : 8
  position : 3

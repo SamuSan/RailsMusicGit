@@ -5,9 +5,8 @@ RSpec.describe CreateBranch do
 
   let(:commit)        { commits(:commit_one) }
   let(:branch)        { branches(:branch_master) }
-  let(:branch_params) { {name: "Sausage", from_commit_id: commit.id, current_branch_id: branch.id, notes: []} }
-  let(:note)          { notes(:note_one) }
-  let(:notes_array)   { [note]  }
+  let(:notes)         {"[ {\"position\":104,\"duration\":1,\"frequency\":335.65}, null ]"}
+  let(:branch_params) { {name: "Sausage", current_commit_id: commit.id, notes: notes, comments: ""} }
 
   context "when making a new branch" do
     describe "call" do
@@ -17,15 +16,24 @@ RSpec.describe CreateBranch do
             CreateBranch.new(branch_params: branch_params).call
           }.to change(Branch, :count).by 1
         end
+      end
 
-        it "the new branch points at a the commit it was branched from" do
-          new_branch = CreateBranch.new(branch_params: branch_params).call
-          expect(new_branch.head_commit.id).not_to be_nil
+      context "a new branch is created from a commit with changed notes" do
+        it "creates the branch with the head commit pointing at a new commit" do
+          expect {
+            new_branch = CreateBranch.new(branch_params: branch_params).call
+          }.to change(Commit, :count).by 1
         end
+      end
 
-        it "points the head_commit to the passed commit as a parent" do
-          new_branch = CreateBranch.new(branch_params: branch_params).call
-          expect(new_branch.head_commit.id).to eq commit.id
+      context "a new branch is created form  a commit with no changed notes" do
+        let(:notes_no_change) {"[ {\"position\":3,\"duration\":6,\"frequency\":330.0}, null ]"}
+        let(:branch_params_no_change) { {name: "Sausage", current_commit_id: commit.id, notes: notes_no_change, comments: ""} }
+
+        it "creates a branch pointing at the current commit" do
+          expect {
+            new_branch = CreateBranch.new(branch_params: branch_params_no_change).call
+          }.to change(Commit, :count).by 0
         end
       end
     end

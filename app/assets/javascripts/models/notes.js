@@ -24,7 +24,7 @@ window.Notes = new function(){
   	  }
     }
         console.log(player_notes)
-  }; 
+  };
 
   this.addNotesForCurrentCommit = function(notes) {
     player_notes = [];
@@ -33,7 +33,7 @@ window.Notes = new function(){
       });
   };
 
-  this.notesInPlayer = function() { 
+  this.notesInPlayer = function() {
     return player_notes;
   };
 

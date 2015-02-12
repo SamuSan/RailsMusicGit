@@ -27,7 +27,7 @@ $(function(){
       }).done(function(result){
         $('#new_commit_comments').val('');
         currentCommit = new Commit(result.commit);
-        branchHeadId = currentCommit.id;
+        loadBranch(currentBranch.id)
         updateCommitsLabel();
       }).fail(function(error){
       	console.log(error);
@@ -54,9 +54,9 @@ function getNotesForCommit(id){
     type: 'GET',
     url: '/projects/'+ projectId + '/branches/' + currentBranchId +   '/commits/' + id
   }).done(function(result){
-      console.log(result)
       currentCommit = new Commit(result.commit);
       Notes.addNotesForCurrentCommit(currentCommit.notes);
+      loadBranch(currentBranch.id)
       updateCommitsLabel();
       Player.renderGrid();
   }).fail(function(error){

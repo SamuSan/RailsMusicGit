@@ -5,9 +5,7 @@ class FindNextCommitId
   end
 
   def call
-    # require 'pry-byebug'; binding.pry
-    child_commit = @all_commits.select { |commit| commit.parent_commit.id == @commit_to_search_from.id unless commit.parent_commit.nil? } 
-    # require 'pry-byebug'; binding.pry
-    child_commit.empty? ? @commit_to_search_from.id : child_commit.first.id     
+    child_commit = @all_commits.select { |commit| commit.parent_commit.id == @commit_to_search_from.id unless commit.parent_commit.nil? }
+    child_commit.empty? ? @commit_to_search_from.id : child_commit.first.id
   end
-end 
+end

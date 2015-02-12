@@ -7,7 +7,6 @@ class CreateCommit
 	end
 
 	def call
-
 		Commit.transaction do
 			@project.lock!(lock = true)
 			@parent_commit 	= Commit.find(@current_commit_id)
