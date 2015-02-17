@@ -23,7 +23,6 @@ window.Notes = new function(){
         player_notes[position] = note;
   	  }
     }
-        console.log(player_notes)
   };
 
   this.addNotesForCurrentCommit = function(notes) {

@@ -1,24 +1,20 @@
-  <container class="col-md-12">
-      <div class="main_container">
-          <div class="project_nav_bar index_title">New Project</div>
-          <table>
-            <%= form_for Project.new do |f| %>
-            <tr>
-              <td class="col-md-3 index_project">
-                Project Title:<%= f.text_field :title, autofocus: true %>
-              </td>
-            </tr>
-            <tr>
-              <td class="col-md-3 index_project">
-                Tempo : <%= f.number_field :tempo %>  
-              </td>
-            </tr>
-              <tr>
-              <td class="col-md-3 index_project">
-                <%= f.submit "Create" %>
-              </td>
-            </tr>
-            <% end %>
-          </table>     
-      </div>
-  </container>
+<container class="col-md-12">
+  <div class="main_container">
+    <div class="project_nav_bar index_title">New Project</div>
+
+      <%= form_for Project.new do |f| %>
+        <div><label>Project Title:</label></div>
+          <div class="create-project-elem">
+            <%= f.text_field :title, autofocus: true %>
+          </div>
+        <div><label>Tempo :</label></div>
+          <div class="create-project-elem">
+            <%= f.number_field :tempo %>
+          </div>
+        <div class="create-project-submit-button">
+          <%= f.submit "Create" %>
+        </div>
+      <% end %>
+
+  </div>
+</container>

@@ -34,12 +34,14 @@ gem 'pry-byebug'
 
 gem 'devise'
 
-gem 'bh', '~> 1.2' 
+gem 'bh', '~> 1.2'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
 
-  gem 'guard-rspec'  
+  gem 'guard-rspec'
+
+  gem 'capybara'
 end
 
 gem 'twitter-bootstrap-rails'
