@@ -5,4 +5,5 @@ class Branch < ActiveRecord::Base
 
   validates :name, presence: true
   validates :head_commit, presence: true
+  #TODO validate name uniqueness against porject
 end

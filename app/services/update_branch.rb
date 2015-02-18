@@ -1,13 +1,10 @@
-class UpdateBranch
+class UpdateBranch#TODO rename MoveBranchCommit
   def initialize(branch:, commit:)
     @branch = branch
     @commit = commit
   end
 
   def call
-    @branch.reload
-    @branch.lock!(lock = true)
-    @branch.head_commit = @commit
-    @branch.save!
+    @branch.update!(head_commit: @commit)
   end
 end

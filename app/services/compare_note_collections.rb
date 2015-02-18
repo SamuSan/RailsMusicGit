@@ -1,21 +1,16 @@
 class CompareNoteCollections
   def initialize(current_notes, new_notes)
-    @current_notes  = current_notes
-    @new_notes      = new_notes
+    @current_notes      = current_notes
+    @new_notes   = new_notes
   end
 
   def call
-    build_array_of_notes(@new_notes)
-    @current_notes.size != @new_notes.size || !compare_notes
+    @current_notes.size == @new_notes.size && notes_match?
   end
 
   private
 
-  def build_array_of_notes(notes)
-    @new_notes = @new_notes.map { |note| Note.new(position:note["position"], duration: note["duration"], frequency: note["frequency"]) }    
-  end
-
-  def compare_notes
-    @current_notes.zip(@new_notes).map { |a,b| a.match?(b) }.all? {|result| result }
+  def notes_match?
+    @current_notes.zip(new_notes).all? { |a, b| a.match?(b) }
   end
 end

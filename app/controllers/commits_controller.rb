@@ -14,13 +14,13 @@ class CommitsController < ApplicationController
 	end
 
 	def create
-			@player = Player.new
-			notes = ParseNotes.new(notes: params[:notes]).call
+		@player = Player.new
+		notes = ParseNotes.new(notes: params[:notes]).call
 
-			commit = CreateCommit.new(project: @project, current_commit_id: params[:current_commit_id], notes: notes, comments: params[:comments]).call
-			UpdateBranch.new(branch: @branch, commit: commit).call
+		commit = CreateCommit.new(project: @project, current_commit_id: params[:current_commit_id], notes: notes, comments: params[:comments]).call
+		UpdateBranch.new(branch: @branch, commit: commit).call
 
-			render json: commit, head_commit: @branch.head_commit
+		render json: commit, head_commit: @branch.head_commit
 	end
 
 	private

@@ -1,6 +1,6 @@
 class Player
-	DRUMS 	= 10
-	TICKS 	= 16
+	DRUMS 	 = 10
+	TICKS 	 = 16
 	PAD_SIZE = 50
 
 	attr_reader :player_grid, :pad_size
